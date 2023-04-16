@@ -1,0 +1,18 @@
+@media (max-width: 768px) {
+    .bgStyle {
+        margin: 0;
+        padding: 0;
+    }
+
+    .contentWrapper {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .content {
+        margin: 0;
+        padding: 0;
+        text-align: start;
+    }
+}

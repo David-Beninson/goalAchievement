@@ -1,0 +1,15 @@
+/* Center everything vertically and horizontally */
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #e4d4d4;
+}
+
+@media (max-width: 400px) {
+  body {
+    background-color: white;
+  }
+}

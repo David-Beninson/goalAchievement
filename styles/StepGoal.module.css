@@ -1,0 +1,203 @@
+.buttons {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-height: 50vh;
+  width: 100%;
+  border: none;
+  margin-bottom: 2cm;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #c9d4d5;
+  border-radius: 5px;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background-color: white;
+}
+
+.stepFormContainer {
+  display: flex;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.topBar .title {
+  flex-grow: 1;
+  margin: 0;
+  min-height: 1cm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00bcd4;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-right: 8px;
+  width: 70%;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  background-color: #00bcd4;
+  color: #fff;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #fff;
+  color: #00bcd4;
+}
+
+.circleAddButton {
+  position: absolute;
+  bottom: 35px;
+  height: 50px;
+  right: 15%;
+  width: 50px;
+  border-radius: 50%;
+  color: #00bcd4;
+  background-color: #ffcc00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transform: scale(1);
+  margin-bottom: 1cm;
+  transition: opacity 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+}
+
+.circleAddButton:hover {
+  background-color: #00bcd4;
+  color: #ffcc00;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text {
+  margin-left: 8px;
+  font-size: 16px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.checkbox {
+  margin-right: 8px;
+}
+
+.editForm {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.editBtn,
+.cancelBtn {
+  padding: 0.5rem;
+  margin-left: 5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editBtn {
+  background-color: #00bcd4;
+  color: #fff;
+  padding: 8px 16px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.cancelBtn {
+  background-color: red;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+/* For screens smaller than 768px (e.g. mobile devices) */
+@media only screen and (max-width: 767px) {
+
+  /* Make buttons stack vertically */
+  .buttons {
+    flex-direction: column;
+  }
+
+  /* Adjust container height and margin */
+  .container {
+    max-height: 80vh;
+    margin-bottom: 1cm;
+  }
+
+  /* Adjust circleAddButton position */
+  .circleAddButton {
+    bottom: 20px;
+    right: 10%;
+  }
+
+  /* Adjust input and button styles */
+  .input {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .btn {
+    margin-right: 0;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  /* Adjust edit and cancel button styles */
+  .editBtn,
+  .cancelBtn {
+    margin-left: 2rem;
+    font-size: 14px;
+  }
+}
