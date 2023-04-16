@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import GoalMarketComponent from "../Components/GoalMarketComponent";
+import GoalMarketComponent from "../components/GoalMarketComponent";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
