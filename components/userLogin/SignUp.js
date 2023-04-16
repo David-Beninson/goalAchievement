@@ -36,7 +36,7 @@ const SignUp = () => {
     const data = await response.json();
     console.log(data);
     if (data) {
-      router.push(`${process.env.NEXTAUTH_URL}`);
+      router.push("https://goal-achievement.vercel.app");
     }
   }
 
