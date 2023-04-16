@@ -30,13 +30,13 @@ const SignUp = () => {
     };
 
     const response = await fetch(
-      "https://goal-achievement.vercel.app/api/auth/signup",
+      `${process.env.NEXTAUTH_URL}/api/auth/signup`,
       options
     );
     const data = await response.json();
     console.log(data);
     if (data) {
-      router.push("https://goal-achievement.vercel.app");
+      router.push(`${process.env.NEXTAUTH_URL}`);
     }
   }
 
