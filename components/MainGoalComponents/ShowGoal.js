@@ -139,7 +139,7 @@ const ShowGoal = ({
                     </button>
                     <button
                       className={styles.button}
-                      onClick={() => handleDeleteGoal(selectedGoalId)}
+                      onClick={() => handleDeleteGoal(goal.IdForGoal)}
                     >
                       <i className="bi bi-trash" style={{ color: "red" }}></i>
                       <BsFillTrashFill />
