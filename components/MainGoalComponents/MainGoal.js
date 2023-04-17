@@ -48,8 +48,15 @@ export default function MainGoal({
         <form onSubmit={handleAddGoal}>
           {showAddGoalForm && (
             <div className={styles.popupWrapper}>
+              <button
+                onClick={() => {
+                  setShowAddGoalForm(!showAddGoalForm);
+                }}
+              >
+                close
+              </button>
               <input
-                className="p-2.5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-100 focus:border-green-100 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-100 dark:focus:border-green-100"
+                className="p-2.5 bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-green-100 focus:border-green-100 block w-full "
                 id="input"
                 type="text"
                 name="title"
