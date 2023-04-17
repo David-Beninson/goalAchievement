@@ -10,14 +10,13 @@ import { GoSignOut } from "react-icons/go";
 
 export default function Home({ user }) {
   const { data: session } = useSession();
+  
   const { username, email, goals } = user;
+  
   const [isShowGoalMarket, setShowGoalMarket] = useState(false);
-
-  //check if step is opend
   const [isStepGoal, setIsStepGoal] = useState(false);
 
   useEffect(() => {
-    //Prevent unauthorized access, log out the user if there is no active session and the user object is null, avoiding redundant logouts.
     if (!session && username === undefined) {
       signOut();
     }
@@ -38,12 +37,12 @@ export default function Home({ user }) {
 
   return (
     <Layout>
-      <div className="flex justify-center items-center gap-20 p-7 bg-gray-100 rounded-lg box-border overflow-x-hidden h-full">
         <Head>
           <title>Home Page</title>
         </Head>
-        <div className="md:hidden">
-          <nav className="justify-between absolute top-28 right-0 h-16 w-16 flex flex-col px-4 py-2">
+        <div className="flex p-0 bg-gray-100 rounded-lg  overflow-x-hidden h-full">
+         <div className="md:hidden">
+           <nav className="justify-between absolute top-0 right-0 h-16 w-16 flex flex-col py-2">
             <div>
               <button
                 className="block text-left py-2 px-4 text-sm text-gray-800 font-medium"
@@ -54,10 +53,11 @@ export default function Home({ user }) {
                 <IoMdMenu className="cursor-pointer text-3xl" />
               </button>
             </div>
+
             {isStepGoal ? (
               <div>
                 <button
-                  className="block text-left py-2 px-4 text-sm text-gray-800 font-medium"
+                  className="h-full block text-left py-2 px-4 text-sm text-gray-800 font-medium"
                   aria-label="Back"
                   onClick={() => setIsStepGoal(false)}
                 >
@@ -67,10 +67,11 @@ export default function Home({ user }) {
             ) : (
               ""
             )}
+
             {!isStepGoal ? (
               <div className="mr-auto">
                 <button
-                  className="block text-left py-2 px-4 text-sm text-gray-800 font-medium"
+                  className="h-full block text-left py-2 px-4 text-sm text-gray-800 font-medium"
                   onClick={() => signOut()}
                   aria-label="Sign out"
                 >
@@ -82,9 +83,10 @@ export default function Home({ user }) {
             )}
           </nav>
         </div>
+
         {isShowGoalMarket ? (
           <div
-            className={`${styles.container} flex flex-col items-center py-8`}
+            className={`h-full flex flex-col items-center py-8`}
           >
             <GoalMarket
               user={user}
@@ -108,6 +110,7 @@ export default function Home({ user }) {
 }
 
 function Guest() {
+
   return (
     <Layout>
       <main className="container mx-auto text-center py-20">
@@ -128,6 +131,7 @@ function Guest() {
 }
 
 function User({ handleSignOut, username, email, goals }) {
+
   const numGoals = goals.length;
 
   return (
@@ -170,8 +174,10 @@ function User({ handleSignOut, username, email, goals }) {
 }
 
 export const getServerSideProps = async (context) => {
+
   const session = await getSession(context);
   const email = session?.user?.email;
+  
   if (!session) {
     return {
       redirect: {
@@ -198,6 +204,7 @@ export const getServerSideProps = async (context) => {
 
     const res = await response.json();
     const user = res.user;
+    
     return {
       props: {
         user,
