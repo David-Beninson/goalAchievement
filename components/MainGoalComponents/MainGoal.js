@@ -49,6 +49,7 @@ export default function MainGoal({
           {showAddGoalForm && (
             <div className={styles.popupWrapper}>
               <button
+              className={styles.closeBtn}
                 onClick={() => {
                   setShowAddGoalForm(!showAddGoalForm);
                 }}
