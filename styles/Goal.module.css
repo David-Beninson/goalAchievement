@@ -87,13 +87,6 @@
     height: 100%;
 }
 
-.goalActions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 1vw;
-    margin: -1vw;
-}
-
 .inputCheckbox[type="checkbox"] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -233,10 +226,6 @@
     .showGoalForm {
         margin-bottom: 0.5cm;
         height: calc(100% - 0.5cm);
-    }
-
-    .goalActions {
-        margin-top: -2em;
     }
 
     .addButtonForm {
