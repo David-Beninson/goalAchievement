@@ -185,6 +185,22 @@
     height: 200px;
 }
 
+.closeBtn {
+    position: absolute;
+    top: -0.5cm;
+    left: -0.3cm;
+    margin: 0.5cm;
+    padding: 0.5cm;
+    font-size: 16px;
+    color: rgb(183, 179, 179);
+    cursor: pointer;
+}
+
+.closeBtn:hover {
+    color: black;
+    transform: scale(0.95);
+}
+
 .pi {
     font-size: 16px;
     margin-right: 1cm;
