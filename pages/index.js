@@ -38,7 +38,7 @@ export default function Home({ user }) {
 
   return (
     <Layout>
-      <div className="flex justify-center items-center gap-20 p-7 bg-gray-100 rounded-lg box-border overflow-x-hidden">
+      <div className="flex justify-center items-center gap-20 p-7 bg-gray-100 rounded-lg box-border overflow-x-hidden h-full">
         <Head>
           <title>Home Page</title>
         </Head>
@@ -132,7 +132,7 @@ function User({ handleSignOut, username, email, goals }) {
 
   return (
     <>
-      <main className="container mx-auto sm:text-center lg:text-left py-20 mr-0">
+      <main className="container text-center py-20">
         <h3 className={`${styles.h3} text-4xl uppercase`}>
           Welcome Back, {username}!
         </h3>
