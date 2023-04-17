@@ -61,7 +61,10 @@ export default function Home({ user }) {
                   aria-label="Back"
                   onClick={() => setIsStepGoal(false)}
                 >
-                  <TbArrowBigLeftFilled className="cursor-pointer text-2xl" />
+                  <TbArrowBigLeftFilled
+                  className="cursor-pointer text-2xl"
+                  style={{ position: "absolute", zIndex: 1 }}
+                  />
                 </button>
               </div>
             ) : (
