@@ -65,14 +65,11 @@ const ShowGoal = ({
       <div className={styles.goalContainer}>
         {goals.length > 0 ? (
           goals.map((goal, index) => (
-            <div
+          <div
               className="grid md:grid grid-cols-4 py-4 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-80 bg-white rounded-lg cursor-pointer transition duration-200 ease-in-out shadow-sm hover:shadow-md modern-style"
               key={goal.id}
-              onClick={() => {
-                if (editingIndex === -1 && selectedGoalId !== goal.id) {
-                  showStepsForGoal(goal);
-                }
-              }}
+              onDrop={handleDrop}
+              onDragOver={(event) => event.preventDefault()}
               style={{
                 backgroundImage: `url(${bgImage})`,
                 backgroundSize: "cover",
@@ -80,8 +77,6 @@ const ShowGoal = ({
                 backgroundRepeat: "no-repeat",
                 filter: "brightness(60%)",
               }}
-              onDrop={handleDrop}
-              onDragOver={(event) => event.preventDefault()}
             >
               <input
                 type="checkbox"
@@ -114,11 +109,27 @@ const ShowGoal = ({
                   </button>
                 </form>
               ) : (
-                <>
-                  <div className={styles.goalTitle}>
-                    <p>{goal.title}</p>
+                    <>
+                  <div
+                    className={styles.goalTitleWrapper}
+                    onClick={() => {
+                      if (editingIndex === -1 && selectedGoalId !== goal.id) {
+                        showStepsForGoal(goal);
+                      }
+                    }}
+                  >
+                    <div className={styles.goalTitle}>
+                      <p>{goal.title}</p>
+                    </div>
                   </div>
-                  <div className={styles.goalActions}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      gap: "0.5rem",
+                    }}
+                  >
                     <button
                       className={styles.button}
                       onClick={() => startEditing(index, goal.title)}
