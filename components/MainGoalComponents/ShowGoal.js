@@ -66,7 +66,7 @@ const ShowGoal = ({
         {goals.length > 0 ? (
           goals.map((goal, index) => (
           <div
-              className="grid md:grid grid-cols-4 py-4 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-80 bg-white rounded-lg cursor-pointer transition duration-200 ease-in-out shadow-sm hover:shadow-md modern-style"
+              className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
               key={goal.id}
               onDrop={handleDrop}
               onDragOver={(event) => event.preventDefault()}
