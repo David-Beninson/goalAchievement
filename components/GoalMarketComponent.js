@@ -149,7 +149,7 @@ function GoalMarket({
     return response.json();
   }
   return (
- <div className="lg:h-96 lg:shadow-lg m-auto lg:mt-40 h-fit w-11/12 lg:w-8/12 flex flex-wrap  bg-white">
+ <div className="lg:h-96 lg:rounded-lg lg:shadow-lg m-auto lg:mt-40 h-fit w-11/12 lg:w-8/12 flex flex-wrap  bg-white">
       <div
         className={`w-full h-3/3 lg:w-1/3 p-4 ${
           showStepGoal ? "hidden md:block" : ""
@@ -174,7 +174,7 @@ function GoalMarket({
         />
       </div>
        <div
-        className={`md:sm:block bg-gray-200 p-20 box-border text-left justify-between relative ${
+        className={`md:sm:block lg:rounded-lg bg-gray-200 p-20 box-border text-left justify-between relative ${
           showStepGoal ? "" : "hidden"
         } lg:flex lg:flex-col lg:min-h-full lg:max-h-50vh lg:w-2/3 lg:bg-gray-200 lg:p-4 lg:box-border lg:relative w-70`}
         style={{ maxHeight: "66vh", overflowY: "auto" }}
