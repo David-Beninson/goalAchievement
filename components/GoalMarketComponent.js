@@ -152,7 +152,11 @@ function GoalMarket({
     <div
       className={`min-w-md ${"md:h-2/3 md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-full flex flex-wrap bg-white`}
     >
-      <div className={`flex flex-col min-w-md ${"md:w-1/3"} p-2`}>
+      <div
+        className={`flex flex-col min-w-md ${"md:w-1/3"} p-2 ${
+          showStepGoal ? "hidden md:block" : ""
+        }`}
+      >
         <MainGoal
           isStepGoal={isStepGoal}
           setIsStepGoal={setIsStepGoal}
