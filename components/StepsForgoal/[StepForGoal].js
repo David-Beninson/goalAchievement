@@ -51,8 +51,11 @@ export default function StepForGoal({
                 goal.steps.map((step, index) => {
                   if (selectedGoalId === goal.IdForGoal) {
                     return (
-                      <div key={step.id} className={styles.stepFormContainer}>
-                        <li className={styles.item}>
+                                            <div
+                        key={step.id}
+                        className={`flex bg-white rounded-md p-3`}
+                      >
+                        <li className={styles.checkboxItem}>
                           <input
                             type="checkbox"
                             checked={step.achieved}
@@ -73,21 +76,25 @@ export default function StepForGoal({
                               achieved={step.achieved}
                             />
                           ) : (
-                            <>
-                              <span>{step.title}</span>
-                              <button
-                                className={styles.btn}
-                                onClick={() => startEditing(index)}
-                              >
-                                Edit
-                              </button>
-                              <button
-                                className={styles.cancelBtn}
-                                onClick={() => deleteStepForGoal(step.stepId)}
-                              >
-                                Delete
-                              </button>
-                            </>
+                                                    <div className="flex justify-between">
+                              <span className="flex items-center">
+                                {step.title}
+                              </span>
+                              <div className="grid grid-cols-2 gap-8 place-items-end ">
+                                <button
+                                  className={`${styles.editBtn} py-2 px-4`}
+                                  onClick={() => startEditing(index)}
+                                >
+                                  Edit
+                                </button>
+                                <button
+                                  className={`${styles.cancelBtn} py-2 px-4`}
+                                  onClick={() => deleteStepForGoal(step.stepId)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
                           )}
                         </li>
                       </div>
@@ -101,7 +108,7 @@ export default function StepForGoal({
         ))}
       </ul>
 
-      <div className={styles.addButtonForm}>
+      <div>
         <button
           className={styles.circleAddButton}
           onClick={() => setIsFormOpen(true)}
