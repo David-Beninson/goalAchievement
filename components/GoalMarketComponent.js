@@ -149,12 +149,10 @@ function GoalMarket({
     return response.json();
   }
   return (
- <div className="lg:h-96 lg:rounded-lg lg:shadow-lg m-auto lg:mt-40 h-fit w-11/12 lg:w-8/12 flex flex-wrap  bg-white">
-      <div
-        className={`w-full h-3/3 lg:w-1/3 p-4 ${
-          showStepGoal ? "hidden md:block" : ""
-        }lg:h-96 lg:overflow-y-auto overflow-x-hidden scrollbar-width-1vw scrollbar-track-e4d4d4 scrollbar-thumb-hidden hover:scrollbar-thumb-bg-gray-300`}
-      >
+    <div
+      className={`min-w-md ${"md:h-2/3 md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-11/12 flex flex-wrap bg-white`}
+    >
+      <div className={`flex flex-col min-w-md ${"md:w-1/3"} p-2`}>
         <MainGoal
           isStepGoal={isStepGoal}
           setIsStepGoal={setIsStepGoal}
@@ -173,10 +171,10 @@ function GoalMarket({
           setShowAddGoalForm={setShowAddGoalForm}
         />
       </div>
-       <div
-        className={`md:sm:block lg:rounded-lg bg-gray-200 p-20 box-border text-left justify-between relative ${
+      <div
+        className={`min-w-md ${"md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg "}  bg-gray-200 p-20 box-border text-left justify-between relative ${
           showStepGoal ? "" : "hidden"
-        } lg:flex lg:flex-col lg:min-h-full lg:max-h-50vh lg:w-2/3 lg:bg-gray-200 lg:p-4 lg:box-border lg:relative w-70`}
+        }`}
         style={{ maxHeight: "66vh", overflowY: "auto" }}
       >
         <Steps
