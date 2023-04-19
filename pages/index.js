@@ -89,7 +89,7 @@ export default function Home({ user }) {
 
         {isShowGoalMarket ? (
           <div
-            className={`h-full flex flex-col items-center py-8`}
+            <div className={`h-full w-full flex flex-col items-center py-8`}>
           >
             <GoalMarket
               user={user}
@@ -141,7 +141,8 @@ function User({ handleSignOut, username, email, goals }) {
     <>
       <main className="container text-center py-20">
         <h3 className={`${styles.h3} text-4xl uppercase`}>
-          Welcome Back, {username}!
+          Welcome Back -
+          <br /> {username}!
         </h3>
 
         <div className={`${styles.details} my-10`}>
@@ -153,7 +154,7 @@ function User({ handleSignOut, username, email, goals }) {
             </div>
           </h5>
           <br />
-          <h5 className="text-gray-400 uppercase">Sign in with: {email}</h5>
+          <h4 className="text-gray-400 uppercase">Sign in with: {email}</h4>
         </div>
 
         <div className="flex justify-center">
