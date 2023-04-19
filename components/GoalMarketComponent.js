@@ -150,7 +150,7 @@ function GoalMarket({
   }
   return (
     <div
-      className={`min-w-md ${"md:h-2/3 md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-11/12 flex flex-wrap bg-white`}
+      className={`min-w-md ${"md:h-2/3 md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-full flex flex-wrap bg-white`}
     >
       <div className={`flex flex-col min-w-md ${"md:w-1/3"} p-2`}>
         <MainGoal
@@ -172,10 +172,9 @@ function GoalMarket({
         />
       </div>
       <div
-        className={`min-w-md ${"md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg "}  bg-gray-200 p-20 box-border text-left justify-between relative ${
+        className={`overflow-y-auto bg-gray-200 text-left relative min-w-md md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full flex items-center justify-center ${
           showStepGoal ? "" : "hidden"
         }`}
-        style={{ overflowY: "auto" }}
       >
         <Steps
           goals={goals}
