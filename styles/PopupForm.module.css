@@ -62,7 +62,8 @@
     color: darkgray;
 }
 
-.btn {
+
+.goalButton {
     opacity: 1;
     transform: scale(1);
     color: rgb(136, 133, 133);
@@ -75,33 +76,21 @@
     right: 2cm;
 }
 
-.btn:hover {
+.goalButton:hover {
     opacity: 0.9;
-    transform: scale(0.95);
     color: black;
+    box-shadow: 0.4vw 0.4vw 0.8vw rgba(0, 0, 0, 0.3);
+    padding: 0.5rem;
 }
 
 @media (max-width: 600px) {
-    .popupWrapper {
-        position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
 
-    .closeBtn {
-        color: rgb(131, 127, 127);
-    }
 
-    .PopupForm {
-        width: 90%;
-    }
-
-    .sharedInputStyle {
-        font-size: 16px;
-    }
-
-    .btn {
+    .goalButton {
+        margin-left: 95%;
+        margin-bottom: 0;
+        color: black;
+        background-image: none;
         font-size: 16px;
     }
 }
