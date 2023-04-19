@@ -5,12 +5,6 @@
 }
 
 .showGoalForm {
-    margin-bottom: 2vw;
-    height: calc(100vh - 2vw);
-    max-height: 57vh;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -36,7 +30,6 @@
 }
 
 .noGoals {
-    margin: 0.5vw;
     color: #777;
     text-align: center;
     padding-right: 1.7vw;
@@ -81,26 +74,20 @@
     padding: 0.5rem;
 }
 
-.goalForm {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.inputCheckbox[type="checkbox"] {
+.inputCheckbox {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #bfbfbf;
+    border: 2px solid white;
     border-radius: 50%;
     outline: none;
     cursor: pointer;
     position: relative;
 }
 
-.inputCheckbox[type="checkbox"]:before {
+.inputCheckbox:before {
     content: "";
     display: block;
     width: 12px;
@@ -114,23 +101,23 @@
     transition: all 0.2s ease;
 }
 
-.inputCheckbox[type="checkbox"]:checked:before {
+.inputCheckbox:checked:before {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.inputCheckbox[type="checkbox"]:hover:before {
+.inputCheckbox:hover:before {
     background-color: #006fe6;
 }
 
-.inputCheckbox[type="checkbox"]:checked {
+.inputCheckbox:checked {
     background: linear-gradient(to bottom, #007aff, #006fe6);
     border-color: #007aff;
 }
 
-.inputCheckbox[type="checkbox"]:checked:after {
+.inputCheckbox:checked:after {
     content: "\2713";
     font-size: 14px;
-    color: #ffffff;
+    color: white;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -178,6 +165,20 @@
     height: 200px;
 }
 
+.pi {
+    font-size: 16px;
+    margin-right: 1cm;
+}
+
+.pi-pencil {
+    color: #2196f3;
+
+}
+
+.pi-times {
+    color: #f44336;
+}
+
 .closeBtn {
     position: absolute;
     top: -0.5cm;
@@ -194,38 +195,13 @@
     transform: scale(0.95);
 }
 
-.pi {
-    font-size: 16px;
-    margin-right: 1cm;
-}
-
-.pi-pencil {
-    color: #2196f3;
-
-}
-
-.pi-times {
-    color: #f44336;
-}
-
-
 @media only screen and (max-width: 600px) {
-    .goalForm {
-        flex-direction: column;
-        height: 30%;
-    }
 
     .container {
         flex-direction: column;
         position: relative;
         max-height: 300px;
         align-items: center;
-        padding: 0;
-    }
-
-    .showGoalForm {
-        margin-bottom: 0.5cm;
-        height: calc(100% - 0.5cm);
     }
 
     .addButtonForm {
