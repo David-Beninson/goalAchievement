@@ -27,18 +27,8 @@
   background-color: white;
 }
 
-.stepFormContainer {
-  display: flex;
-  background: white;
-  padding: 15px 20px;
-  border-radius: 5px;
-  margin-top: 10px;
-  align-items: center;
-}
-
 .topBar .title {
   flex-grow: 1;
-  margin: 0;
   min-height: 1cm;
   display: flex;
   align-items: center;
@@ -55,23 +45,6 @@
   border: 1px solid #ccc;
   margin-right: 8px;
   width: 70%;
-}
-
-.btn {
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 16px;
-  margin-right: 8px;
-  cursor: pointer;
-  border: none;
-  background-color: #00bcd4;
-  color: #fff;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.btn:hover {
-  background-color: #fff;
-  color: #00bcd4;
 }
 
 .circleAddButton {
@@ -114,10 +87,9 @@
   margin: 0;
 }
 
-.item {
+.checkboxItem {
   display: flex;
   align-items: center;
-  margin-top: 8px;
 }
 
 .checkbox {
@@ -133,21 +105,23 @@
 .editBtn,
 .cancelBtn {
   padding: 0.5rem;
-  margin-left: 5rem;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .editBtn {
-  background-color: #00bcd4;
-  color: #fff;
-  padding: 8px 16px;
-  padding: 8px 16px;
   border-radius: 4px;
   font-size: 16px;
-  margin-right: 8px;
   cursor: pointer;
   border: none;
+  background-color: #00bcd4;
+  color: #fff;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.editBtn:hover {
+  background-color: #fff;
+  color: #00bcd4;
 }
 
 .cancelBtn {
@@ -156,7 +130,6 @@
   padding: 8px 16px;
   border-radius: 4px;
   font-size: 16px;
-  margin-right: 8px;
   cursor: pointer;
   border: none;
 }
@@ -175,9 +148,8 @@
     margin-bottom: 1cm;
   }
 
-  /* Adjust circleAddButton position */
   .circleAddButton {
-    bottom: 20px;
+    bottom: 12%;
     right: 10%;
   }
 
@@ -188,16 +160,9 @@
     margin-bottom: 8px;
   }
 
-  .btn {
-    margin-right: 0;
-    margin-bottom: 8px;
-    width: 100%;
-  }
-
   /* Adjust edit and cancel button styles */
   .editBtn,
   .cancelBtn {
-    margin-left: 2rem;
     font-size: 14px;
   }
 }
