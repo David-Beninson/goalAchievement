@@ -52,7 +52,9 @@ export default function MainGoal({
         </div>
         <form onSubmit={handleAddGoal}>
           {showAddGoalForm && (
-            <div className={styles.popupWrapper}>
+             <div
+              className={`grid grid-cols-1 gap-3 place-content-center ${styles.popupWrapper}`}
+            >
               <button
                 onClick={() => {
                   setShowAddGoalForm(!showAddGoalForm);
