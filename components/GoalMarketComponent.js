@@ -175,7 +175,7 @@ function GoalMarket({
         className={`min-w-md ${"md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg "}  bg-gray-200 p-20 box-border text-left justify-between relative ${
           showStepGoal ? "" : "hidden"
         }`}
-        style={{ maxHeight: "66vh", overflowY: "auto" }}
+        style={{ overflowY: "auto" }}
       >
         <Steps
           goals={goals}
