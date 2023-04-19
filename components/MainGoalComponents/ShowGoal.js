@@ -61,103 +61,94 @@ const ShowGoal = ({
   };
 
   return (
-    <div className={styles.goalForm}>
-      <div className={styles.goalContainer}>
-        {goals.length > 0 ? (
-          goals.map((goal, index) => (
+    <div>
+      {goals.length > 0 ? (
+        goals.map((goal, index) => (
           <div
-              className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
-              key={goal.id}
-              onDrop={handleDrop}
-              onDragOver={(event) => event.preventDefault()}
-              style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                filter: "brightness(60%)",
-              }}
-            >
-              <input
-                type="checkbox"
-                checked={goal.achieved}
-                className="w-20 h-4 border-gray-300 outline-none cursor-pointer relative"
-                onChange={() => {
-                  goalAchieved(goal, index);
-                }}
-              />
-
-              {editingIndex === index ? (
-                <form>
-                  <input
-                    type="text"
-                    value={editedTitle}
-                    onChange={(event) => setEditedTitle(event.target.value)}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      saveEditedGoalTitle(event, goal, editedTitle)
-                    }
-                  >
-                    Save
-                  </button>
-
-                  <br />
-                  <button type="button" onClick={cancelEditing}>
-                    Cancel
-                  </button>
-                </form>
-              ) : (
-                    <>
-                  <div
-                    className={styles.goalTitleWrapper}
-                    onClick={() => {
-                      if (editingIndex === -1 && selectedGoalId !== goal.id) {
-                        showStepsForGoal(goal);
-                      }
-                    }}
-                  >
-                    <div className={styles.goalTitle}>
-                      <p>{goal.title}</p>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-end",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <button
-                      className={styles.button}
-                      onClick={() => startEditing(index, goal.title)}
-                    >
-                      <i className="ti ti-EditCircle"></i>
-                      <TbEditCircle />
-                    </button>
-                    <button
-                      className={styles.button}
-                      onClick={() => handleDeleteGoal(goal.IdForGoal)}
-                    >
-                      <i className="bi bi-trash" style={{ color: "red" }}></i>
-                      <BsFillTrashFill />
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
-          ))
-        ) : (
-          <div
-            className={`${styles.noGoals} flex items-center text-center sm:text-xl`}
+            className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
+            key={goal.id}
+            onDrop={handleDrop}
+            onDragOver={(event) => event.preventDefault()}
+            style={{
+              backgroundImage: `url(${bgImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              filter: "brightness(60%)",
+            }}
           >
-            There are no goals to show! Click the add button to create a new
-            goal.
+            <input
+              type="checkbox"
+              checked={goal.achieved}
+              className="w-20 h-4 outline-none cursor-pointer relative"
+              onChange={() => {
+                goalAchieved(goal, index);
+              }}
+            />
+
+            {editingIndex === index ? (
+              <form>
+                <input
+                  type="text"
+                  style={{ backgroundColor: "white" }}
+                  value={editedTitle}
+                  onChange={(event) => setEditedTitle(event.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => saveEditedGoalTitle(event, goal, editedTitle)}
+                >
+                  Save
+                </button>
+
+                <br />
+                <button type="button" onClick={cancelEditing}>
+                  Cancel
+                </button>
+              </form>
+            ) : (
+              <>
+                <div
+                  onClick={() => {
+                    if (editingIndex === -1 && selectedGoalId !== goal.id) {
+                      showStepsForGoal(goal);
+                    }
+                  }}
+                >
+                  <p>{goal.title}</p>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <button
+                    onClick={() => startEditing(index, goal.title)}
+                  >
+                    <i className="ti ti-EditCircle"></i>
+                    <TbEditCircle />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteGoal(goal.IdForGoal)}
+                  >
+                    <i className="bi bi-trash"></i>
+                    <BsFillTrashFill />
+                  </button>
+                </div>
+              </>
+            )}
           </div>
-        )}
-      </div>
+        ))
+      ) : (
+        <div
+          className={`${styles.noGoals} mt-10 flex items-center text-center sm:text-xl`}
+        >
+          There are no goals to show! Click the add button to create a new goal.
+        </div>
+      )}
     </div>
   );
 };
