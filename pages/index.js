@@ -89,8 +89,7 @@ export default function Home({ user }) {
 
         {isShowGoalMarket ? (
           <div
-            <div className={`h-full flex flex-col items-center py-8`}>
-          >
+            <div className={`h-full w-full flex flex-col items-center py-8`}>
             <GoalMarket
               user={user}
               isStepGoal={isStepGoal}
