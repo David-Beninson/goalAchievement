@@ -19,10 +19,11 @@ export default function MainGoal({
   setIsStepGoal,
 }) {
   return (
-    <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-between lg:max-h-full md:max-h-80">
+    <div className=" flex flex-col items-center lg:flex-row lg:items-start lg:justify-between">
       <div>
-        <h6 className="text-sky-500 text-center hidden sm:block">My Goals</h6>
-        <div>
+        <div className="absolute">
+          <h6 className="text-sky-500 text-center hidden sm:block">My Goals</h6>
+
           <button
             className={styles.circleAddButton}
             onClick={() => setShowAddGoalForm(!showAddGoalForm)}
@@ -30,7 +31,11 @@ export default function MainGoal({
             +
           </button>
         </div>
-        <div className="mb-2vw h-96 max-h-full flex flex-col overflow-y-auto overflow-x-hidden scrollbar-width-1vw scrollbar-track-e4d4d4 scrollbar-thumb-hidden hover:scrollbar-thumb-bg-gray-300">
+        <div
+          className={`min-w-md ${"md:mt-20 md:h-72"} flex flex-col mt-12 overflow-y-auto min-w-md max-h-none h-3/4  ${
+            styles.showGoalForm
+          } `}
+        >
           <ShowGoal
             isStepGoal={isStepGoal}
             setIsStepGoal={setIsStepGoal}
@@ -49,15 +54,15 @@ export default function MainGoal({
           {showAddGoalForm && (
             <div className={styles.popupWrapper}>
               <button
-              className={styles.closeBtn}
                 onClick={() => {
                   setShowAddGoalForm(!showAddGoalForm);
                 }}
+                className={styles.closeBtn}
               >
                 close
               </button>
               <input
-                className="border-2  border-gray-400 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="border-2 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 id="input"
                 type="text"
                 name="title"
