@@ -51,9 +51,9 @@ export default function StepForGoal({
                 goal.steps.map((step, index) => {
                   if (selectedGoalId === goal.IdForGoal) {
                     return (
-                                            <div
+                      <div
                         key={step.id}
-                        className={`flex bg-white rounded-md p-3`}
+                        className={`flex bg-white mt-3 rounded-md p-3 `}
                       >
                         <li className={styles.checkboxItem}>
                           <input
@@ -76,7 +76,7 @@ export default function StepForGoal({
                               achieved={step.achieved}
                             />
                           ) : (
-                                                    <div className="flex justify-between">
+                            <div className="flex justify-between">
                               <span className="flex items-center">
                                 {step.title}
                               </span>
