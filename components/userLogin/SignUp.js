@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import { HiAtSymbol, HiFingerPrint, HiOutlineUser } from "react-icons/hi";
 import { registerValidate } from "../../lib/validate";
 import styles from "../../styles/Form.module.css";
-import Layout from "../../layout/layout";
 import Link from "next/link";
 
 const SignUp = () => {
@@ -42,7 +41,7 @@ const SignUp = () => {
   }
 
   return (
-    <Layout className="">
+    <>
       <section className="w-full mx-auto flex flex-col gap-9">
         <h1
           className="text-4xl font-serif"
@@ -159,7 +158,7 @@ const SignUp = () => {
           </Link>
         </div>
       </section>
-    </Layout>
+    </>
   );
 };
 

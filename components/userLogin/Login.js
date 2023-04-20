@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <>
       <section className="w-3/4 mx-auto flex flex-col gap-20">
         <h1
           className="text-3xl font-mono"
@@ -124,7 +124,7 @@ const Login = () => {
           </p>
         </div>
       </section>
-    </Layout>
+    </>
   );
 };
 
