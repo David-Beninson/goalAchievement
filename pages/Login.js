@@ -1,12 +1,14 @@
 import Login from "../components/userLogin/Login";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
+
 const LoginPage = () => {
   return (
     <>
       <Head>
         <title>Login</title>
       </Head>
+      
       <Login />
     </>
   );

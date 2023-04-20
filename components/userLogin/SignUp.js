@@ -6,6 +6,7 @@ import { registerValidate } from "../../lib/validate";
 import styles from "../../styles/Form.module.css";
 import Layout from "../../layout/layout";
 import Link from "next/link";
+
 const SignUp = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
