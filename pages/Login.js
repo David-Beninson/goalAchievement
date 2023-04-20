@@ -8,6 +8,14 @@ const LoginPage = () => {
     <Layout>
       <Head>
         <title>Login</title>
+        <meta
+          property="og:image"
+          content="https://goal-achievement.vercel.app/ImageUrl.png"
+        />
+        <meta
+          property="og:url"
+          content="https://goal-achievement.vercel.app/Login"
+        />
       </Head>
 
       <Login />
