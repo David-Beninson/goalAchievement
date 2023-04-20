@@ -10,9 +10,9 @@ import { GoSignOut } from "react-icons/go";
 
 export default function Home({ user }) {
   const { data: session } = useSession();
-  
+
   const { username, email, goals } = user;
-  
+
   const [isShowGoalMarket, setShowGoalMarket] = useState(false);
   const [isStepGoal, setIsStepGoal] = useState(false);
 
@@ -37,13 +37,12 @@ export default function Home({ user }) {
 
   return (
     <Layout>
-        <Head>
-          <title>Home Page</title>
-          <meta property="og:image" content="./public/ImageUrl.png"/>
-        </Head>
-        <div className="flex p-0 bg-gray-100 rounded-lg  overflow-x-hidden h-full">
-         <div className="md:hidden">
-           <nav className="justify-between absolute top-0 right-0 h-16 w-16 flex flex-col py-2">
+      <Head>
+        <title>Home Page</title>
+      </Head>
+      <div className="flex p-0 bg-gray-100 rounded-lg  overflow-x-hidden h-full">
+        <div className="md:hidden">
+          <nav className="justify-between absolute top-0 right-0 h-16 w-16 flex flex-col py-2">
             <div>
               <button
                 className="block text-left py-2 px-4 text-sm text-gray-800 font-medium"
@@ -63,8 +62,8 @@ export default function Home({ user }) {
                   onClick={() => setIsStepGoal(false)}
                 >
                   <TbArrowBigLeftFilled
-                  className="cursor-pointer text-2xl"
-                  style={{ position: "absolute", zIndex: 1 }}
+                    className="cursor-pointer text-2xl"
+                    style={{ position: "absolute", zIndex: 1 }}
                   />
                 </button>
               </div>
@@ -112,7 +111,6 @@ export default function Home({ user }) {
 }
 
 function Guest() {
-
   return (
     <Layout>
       <main className="container mx-auto text-center py-20">
@@ -133,7 +131,6 @@ function Guest() {
 }
 
 function User({ handleSignOut, username, email, goals }) {
-
   const numGoals = goals.length;
 
   return (
@@ -177,10 +174,9 @@ function User({ handleSignOut, username, email, goals }) {
 }
 
 export const getServerSideProps = async (context) => {
-
   const session = await getSession(context);
   const email = session?.user?.email;
-  
+
   if (!session) {
     return {
       redirect: {
@@ -207,7 +203,7 @@ export const getServerSideProps = async (context) => {
 
     const res = await response.json();
     const user = res.user;
-    
+
     return {
       props: {
         user,
