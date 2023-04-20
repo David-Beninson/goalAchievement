@@ -4,10 +4,6 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  max-height: 50vh;
-  width: 100%;
   border: none;
   margin-bottom: 2cm;
   overflow-y: scroll;
