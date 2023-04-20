@@ -133,6 +133,8 @@ function Guest() {
 function User({ handleSignOut, username, email, goals }) {
   const numGoals = goals.length;
 
+  const numGoalsAchieved = goals.filter((goal) => goal.achieved).length;
+
   return (
     <>
       <main className="container text-center py-20">
@@ -146,7 +148,10 @@ function User({ handleSignOut, username, email, goals }) {
             {" "}
             <div>
               You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
-              {numGoals !== 0 ? "" : " yet"} .
+              {numGoals !== 0 ? "" : " yet"}.<br />
+              <p className=" text-sm">
+                {numGoalsAchieved} of them have been achieved .
+              </p>
             </div>
           </h5>
           <br />

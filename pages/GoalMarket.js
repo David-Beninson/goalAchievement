@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 function GoalMarket({ user, ...props }) {
   const router = useRouter();
+
   const { data: session } = useSession();
   const [email, setEmail] = useState("");
   const [goalsList, setGoals] = useState([]);
@@ -107,7 +108,7 @@ function GoalMarket({ user, ...props }) {
             <div className="hidden md:sm:block">
               <p className="uppercase">Welcome {usersName}! </p>
               <img src={user.image} style={{ borderRadius: "50px" }} />
-              <button onClick={() => signOut()}>Sign out</button>
+              <button onClick={() => router.push("/")}>Home page</button>
             </div>
             <GoalMarketComponent
               isStepGoal={isStepGoal}
