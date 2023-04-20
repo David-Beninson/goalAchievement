@@ -63,85 +63,87 @@ const ShowGoal = ({
   return (
     <div>
       {goals.length > 0 ? (
-        goals.map((goal, index) => (
-          <div
-            className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
-            key={goal.id}
-            onDrop={handleDrop}
-            onDragOver={(event) => event.preventDefault()}
-            style={{
-              backgroundImage: `url(${bgImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-              filter: "brightness(60%)",
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={goal.achieved}
-              className="w-20 h-4 outline-none cursor-pointer relative"
-              onChange={() => {
-                goalAchieved(goal, index);
+        goals
+          .sort((a, b) => a.achieved - b.achieved)
+          .map((goal, index) => (
+            <div
+              className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
+              key={goal.id}
+              onDrop={handleDrop}
+              onDragOver={(event) => event.preventDefault()}
+              style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                filter: "brightness(60%)",
               }}
-            />
+            >
+              <input
+                type="checkbox"
+                checked={goal.achieved}
+                className="w-20 h-4 outline-none cursor-pointer relative"
+                onChange={() => {
+                  goalAchieved(goal, index);
+                }}
+              />
 
-            {editingIndex === index ? (
-              <form>
-                <input
-                  type="text"
-                  style={{ backgroundColor: "white" }}
-                  value={editedTitle}
-                  onChange={(event) => setEditedTitle(event.target.value)}
-                />
-                <button
-                  type="button"
-                  onClick={() => saveEditedGoalTitle(event, goal, editedTitle)}
-                >
-                  Save
-                </button>
-
-                <br />
-                <button type="button" onClick={cancelEditing}>
-                  Cancel
-                </button>
-              </form>
-            ) : (
-              <>
-                <div
-                  onClick={() => {
-                    if (editingIndex === -1 && selectedGoalId !== goal.id) {
-                      showStepsForGoal(goal);
+              {editingIndex === index ? (
+                <form>
+                  <input
+                    type="text"
+                    style={{ backgroundColor: "white" }}
+                    value={editedTitle}
+                    onChange={(event) => setEditedTitle(event.target.value)}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      saveEditedGoalTitle(event, goal, editedTitle)
                     }
-                  }}
-                >
-                  <p>{goal.title}</p>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-end",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <button
-                    onClick={() => startEditing(index, goal.title)}
                   >
-                    <i className="ti ti-EditCircle"></i>
-                    <TbEditCircle />
+                    Save
                   </button>
-                  <button
-                    onClick={() => handleDeleteGoal(goal.IdForGoal)}
+
+                  <br />
+                  <button type="button" onClick={cancelEditing}>
+                    Cancel
+                  </button>
+                </form>
+              ) : (
+                <>
+                  <div
+                    onClick={() => {
+                      if (editingIndex === -1 && selectedGoalId !== goal.id) {
+                        showStepsForGoal(goal);
+                      }
+                    }}
                   >
-                    <i className="bi bi-trash"></i>
-                    <BsFillTrashFill />
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        ))
+                    <p className={`${goal.achieved ? "line-through" : ""}`}>
+                      {goal.title}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <button onClick={() => startEditing(index, goal.title)}>
+                      <i className="ti ti-EditCircle"></i>
+                      <TbEditCircle />
+                    </button>
+                    <button onClick={() => handleDeleteGoal(goal.IdForGoal)}>
+                      <i className="bi bi-trash"></i>
+                      <BsFillTrashFill />
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))
       ) : (
         <div
           className={`${styles.noGoals} mt-10 flex items-center text-center sm:text-xl`}
