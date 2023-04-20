@@ -16,7 +16,7 @@ export default function Layout({ children }) {
         />
         <meta
           property="og:url"
-          content="https://goal-achievement.vercel.app/Login"
+          content="https://goal-achievement.vercel.app/"
         />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
