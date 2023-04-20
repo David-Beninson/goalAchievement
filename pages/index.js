@@ -55,7 +55,7 @@ export default function Home({ user }) {
             </div>
 
             {isStepGoal ? (
-              <div>
+              <div className="justify-between py-2">
                 <button
                   className="h-full block text-left py-2 px-4 text-sm text-gray-800 font-medium"
                   aria-label="Back"
@@ -71,8 +71,25 @@ export default function Home({ user }) {
               ""
             )}
 
-            {!isStepGoal ? (
-              <div className="mr-auto">
+            {isShowGoalMarket && !isStepGoal ? (
+              <div className="justify-between py-2">
+                <button
+                  className="h-full block text-left px-4 text-sm text-gray-800 font-medium"
+                  aria-label="Back"
+                  onClick={toggleGoalMarket}
+                >
+                  <TbArrowBigLeftFilled
+                    className="cursor-pointer text-2xl"
+                    style={{ position: "absolute", zIndex: 1 }}
+                  />
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {!isStepGoal && !isShowGoalMarket ? (
+              <div>
                 <button
                   className="h-full block text-left py-2 px-4 text-sm text-gray-800 font-medium"
                   onClick={() => signOut()}
@@ -100,6 +117,7 @@ export default function Home({ user }) {
           <User
             session={session}
             handleSignOut={handleSignOut}
+            toggleGoalMarket={toggleGoalMarket}
             username={username}
             email={email}
             goals={goals}
@@ -130,7 +148,7 @@ function Guest() {
   );
 }
 
-function User({ handleSignOut, username, email, goals }) {
+function User({ handleSignOut, username, email, goals, toggleGoalMarket }) {
   const numGoals = goals.length;
 
   const numGoalsAchieved = goals.filter((goal) => goal.achieved).length;
@@ -149,13 +167,26 @@ function User({ handleSignOut, username, email, goals }) {
             <div>
               You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
               {numGoals !== 0 ? "" : " yet"}.<br />
+              <br />
               <p className=" text-sm">
                 {numGoalsAchieved} of them have been achieved .
               </p>
             </div>
           </h5>
           <br />
-          <h4 className="text-gray-400 uppercase">Sign in with: {email}</h4>
+          <div className="py-5">
+            <button
+              className="inline-block md:hidden lg:hidden"
+              onClick={() => {
+                toggleGoalMarket();
+              }}
+            >
+              Press here to see your goals
+            </button>
+          </div>
+          <div>
+            <h4 className="text-gray-400 uppercase">Sign in with: {email}</h4>
+          </div>
         </div>
 
         <div className="flex justify-center">
