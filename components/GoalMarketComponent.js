@@ -176,7 +176,7 @@ function GoalMarket({
         />
       </div>
       <div
-        className={`overflow-y-auto w-full bg-gray-200 relative min-w-md md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
+        className={`overflow-y-auto w-screen px-4 bg-gray-200 relative min-w-md md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "" : "hidden"
         }`}
       >

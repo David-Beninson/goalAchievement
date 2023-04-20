@@ -9,7 +9,7 @@
 }
 
 .showGoalForm::-webkit-scrollbar {
-    width: 1vw;
+    width: 0.5vw;
 }
 
 .showGoalForm::-webkit-scrollbar-thumb {
