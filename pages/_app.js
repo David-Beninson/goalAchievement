@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps, session }) {
         />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
-
         <meta property="og:url" content="https://goal-achievement.vercel.app" />
+        <title>Goal achievement</title>
       </Head>
       <Component {...pageProps} />
     </SessionProvider>
