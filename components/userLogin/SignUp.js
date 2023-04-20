@@ -30,13 +30,13 @@ const SignUp = () => {
     };
 
     const response = await fetch(
-      "https://goal-app.vercel.app/api/auth/signup",
+      "https://goal-achievement.vercel.app/api/auth/signup",
       options
     );
     const data = await response.json();
     console.log(data);
     if (data) {
-      router.push("https://goal-app.vercel.app");
+      router.push("https://goal-achievement.vercel.app");
     }
   }
 
