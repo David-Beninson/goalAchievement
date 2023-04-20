@@ -1,6 +1,6 @@
 import SignupComponent from "../components/userLogin/SignUp";
 import Head from "next/head";
-import Layout from "@/layout/layout";
+import Layout from "../layout/layout";
 
 export default function SignUpPage() {
   return (

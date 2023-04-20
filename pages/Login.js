@@ -1,7 +1,7 @@
 import Login from "../components/userLogin/Login";
 import Head from "next/head";
 import { getSession } from "next-auth/react";
-import Layout from "@/layout/layout";
+import Layout from "../layout/layout";
 
 const LoginPage = () => {
   return (
