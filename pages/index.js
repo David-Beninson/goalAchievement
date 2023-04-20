@@ -39,6 +39,7 @@ export default function Home({ user }) {
     <Layout>
         <Head>
           <title>Home Page</title>
+          <meta property="og:image" content="./public/ImageUrl.png"/>
         </Head>
         <div className="flex p-0 bg-gray-100 rounded-lg  overflow-x-hidden h-full">
          <div className="md:hidden">
