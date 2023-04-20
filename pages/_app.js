@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
-import ImageUrl from "../public/ImageUrl.png";
 
 function MyApp({ Component, pageProps, session }) {
   return (
@@ -14,7 +13,10 @@ function MyApp({ Component, pageProps, session }) {
           property="og:description"
           content="Plan and conquer your goals with our goal achievement app"
         />
-        <meta property="og:image" content={ImageUrl} />
+        <meta
+          property="og:image"
+          content="https://goal-achievement.vercel.app/ImageUrl.png"
+        />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
 
