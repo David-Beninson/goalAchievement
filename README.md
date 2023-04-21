@@ -1,12 +1,13 @@
 # Task Manager
 
-Task Manager is a web application that allows users to manage their tasks. It is built using Next.js and MongoDB.
+The Task Manager is a powerful web application built using Next.js and MongoDB, designed to help users achieve their goals by breaking them down into smaller, more manageable steps. With this app, users can set long-term goals and create achievable milestones for each goal.
+Additionally, it is worth mentioning that the Task Manager web application is fully responsive, meaning it is optimized for use on mobile devices, providing a seamless user experience regardless of the device used to access the app.
 
 ## Features
 
-- Create an "end" task
-- Add steps towards the taskand
-- Manage the tasks
+- Create a new task
+- Add steps towards a task
+- Manage tasks
 - Track progress of tasks
 
 ## Installation
@@ -17,11 +18,16 @@ Task Manager is a web application that allows users to manage their tasks. It is
 
 ## Usage
 
-1. Create an account or log in with an existing account
+1.Create an account or log in with an existing account
 2. Create a new task by clicking the " + " button
-3. Enter a title, description for the task
-5. Click "Add" to save the task
+3. Enter a title and description for the task
+4. Add steps towards the task by clicking the "Add Step" button
+5. Click "Save" to save the task
 
 ## Contributing
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+## Conclusion
+
+If you're looking for a tool to help you achieve your goals, then the Task Manager app can be useful for you. Try it out and start breaking your long-term goals into smaller, more achievable steps. Access the app here: https://goal-achievement.vercel.app/ 
