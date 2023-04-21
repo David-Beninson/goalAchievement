@@ -4,13 +4,10 @@ Task Manager is a web application that allows users to manage their tasks. It is
 
 ## Features
 
-- Create and manage tasks
-- Set due dates for tasks
-- Assign tasks to other users
+- Create an "end" task
+- Add steps towards the taskand
+- Manage the tasks
 - Track progress of tasks
-- Receive notifications when tasks are due
-- View task history
-- Customize task views
 
 ## Installation
 
@@ -21,10 +18,9 @@ Task Manager is a web application that allows users to manage their tasks. It is
 ## Usage
 
 1. Create an account or log in with an existing account
-2. Create a new task by clicking the "New Task" button
-3. Enter a title, description, and due date for the task
-4. Assign the task to another user if desired
-5. Click "Save" to save the task
+2. Create a new task by clicking the " + " button
+3. Enter a title, description for the task
+5. Click "Add" to save the task
 
 ## Contributing
 
