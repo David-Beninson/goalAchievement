@@ -18,7 +18,7 @@ Additionally, it is worth mentioning that the Task Manager web application is fu
 
 ## Usage
 
-1.Create an account or log in with an existing account
+1. Create an account or log in with an existing account
 2. Create a new task by clicking the " + " button
 3. Enter a title and description for the task
 4. Add steps towards the task by clicking the "Add Step" button
