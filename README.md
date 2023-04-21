@@ -1,6 +1,6 @@
 # Task Manager
 
-Task Manager is a web application that allows users to manage their tasks. It is built using Next.js, React, and MongoDB.
+Task Manager is a web application that allows users to manage their tasks. It is built using Next.js and MongoDB.
 
 ## Features
 
