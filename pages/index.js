@@ -10,11 +10,32 @@ import { GoSignOut } from "react-icons/go";
 
 export default function Home({ user }) {
   const { data: session } = useSession();
-
   const { username, email, goals } = user;
 
   const [isShowGoalMarket, setShowGoalMarket] = useState(false);
   const [isStepGoal, setIsStepGoal] = useState(false);
+  const [numGoals, setNumGoals] = useState(0);
+  const [numGoalsAchieved, setNumGoalsAchieved] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/getDataOnUser?email=${email}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const json = await response.json();
+        setNumGoals(json.user.goals.length);
+        setNumGoalsAchieved(
+          json.user.goals.filter((goal) => goal.achieved).length
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [user]);
 
   useEffect(() => {
     if (!session && username === undefined) {
@@ -27,7 +48,7 @@ export default function Home({ user }) {
   }
 
   function toggleGoalMarket() {
-    setShowGoalMarket(!isShowGoalMarket);
+    setShowGoalMarket((prevState) => !prevState);
     setIsStepGoal(false);
   }
 
@@ -120,7 +141,8 @@ export default function Home({ user }) {
             toggleGoalMarket={toggleGoalMarket}
             username={username}
             email={email}
-            goals={goals}
+            numGoals={numGoals}
+            numGoalsAchieved={numGoalsAchieved}
           />
         )}
       </div>
@@ -148,11 +170,14 @@ function Guest() {
   );
 }
 
-function User({ handleSignOut, username, email, goals, toggleGoalMarket }) {
-  const numGoals = goals.length;
-
-  const numGoalsAchieved = goals.filter((goal) => goal.achieved).length;
-
+function User({
+  handleSignOut,
+  username,
+  email,
+  toggleGoalMarket,
+  numGoals,
+  numGoalsAchieved,
+}) {
   return (
     <>
       <main className="container text-center py-20">
@@ -162,17 +187,29 @@ function User({ handleSignOut, username, email, goals, toggleGoalMarket }) {
         </h3>
 
         <div className={`${styles.details} my-10`}>
-          <h5 className="text-lg uppercase">
+          <div>
             {" "}
             <div>
-              You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
-              {numGoals !== 0 ? "" : " yet"}.<br />
+              {!numGoals ? (
+                <p>
+                  It's a good time to start setting goals. You don't have any
+                  yet.
+                </p>
+              ) : (
+                <h5 className="text-lg uppercase">
+                  You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
+                  {numGoals !== 0 ? "" : " yet"}.
+                </h5>
+              )}
+              <br />
               <br />
               <p className=" text-sm">
-                {numGoalsAchieved} of them have been achieved .
+                {numGoalsAchieved && numGoals
+                  ? `${numGoalsAchieved} of them have been achieved.`
+                  : ""}
               </p>
             </div>
-          </h5>
+          </div>
           <br />
           <div className="py-5">
             <button
