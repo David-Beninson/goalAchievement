@@ -191,7 +191,7 @@ function User({
             {" "}
             <div>
               {!numGoals ? (
-                <p>
+                <p className=" text-sm">
                   It's a good time to start setting goals. You don't have any
                   yet.
                 </p>
