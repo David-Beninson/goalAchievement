@@ -17,6 +17,31 @@ export default function Home({ user }) {
   const [numGoals, setNumGoals] = useState(0);
   const [numGoalsAchieved, setNumGoalsAchieved] = useState(0);
 
+  //   const [hasFetchedData, setHasFetchedData] = useState(false);
+
+  // useEffect(() => {
+  //   if (!hasFetchedData) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await fetch(`/api/getDataOnUser?email=${email}`);
+  //         if (!response.ok) {
+  //           throw new Error("Network response was not ok");
+  //         }
+  //         const json = await response.json();
+  //         setNumGoals(json.user.goals.length);
+  //         setNumGoalsAchieved(
+  //           json.user.goals.filter((goal) => goal.achieved).length
+  //         );
+  //       } catch (error) {
+  //         console.error("Error fetching data:", error);
+  //       }
+  //     };
+
+  //     fetchData();
+  //     setHasFetchedData(true);
+  //   }
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,7 +60,7 @@ export default function Home({ user }) {
     };
 
     fetchData();
-  }, [user]);
+  }, [user, goals, isShowGoalMarket]);
 
   useEffect(() => {
     if (!session && username === undefined) {
