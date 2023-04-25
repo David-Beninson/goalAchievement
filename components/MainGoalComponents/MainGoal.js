@@ -32,7 +32,7 @@ export default function MainGoal({
           </button>
         </div>
         <div
-          className={`min-w-md ${"md:mt-20 md:h-72"} flex flex-col mt-12 overflow-y-auto min-w-md max-h-none h-3/4  ${
+          className={`min-w-md ${"md:mt-20"} flex flex-col mt-12 overflow-y-auto ${
             styles.showGoalForm
           } `}
         >
@@ -52,9 +52,7 @@ export default function MainGoal({
         </div>
         <form onSubmit={handleAddGoal}>
           {showAddGoalForm && (
-             <div
-              className={`grid grid-cols-1 gap-3 place-content-center ${styles.popupWrapper}`}
-            >
+            <div className={styles.popupWrapper}>
               <button
                 onClick={() => {
                   setShowAddGoalForm(!showAddGoalForm);
