@@ -6,6 +6,7 @@
 
 .showGoalForm {
     overflow-x: hidden;
+    height: 60vh;
 }
 
 .showGoalForm::-webkit-scrollbar {
@@ -196,6 +197,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+
+    .showGoalForm {
+        height: 80%;
+    }
 
     .container {
         flex-direction: column;
