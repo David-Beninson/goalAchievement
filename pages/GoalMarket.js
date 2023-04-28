@@ -3,16 +3,18 @@ import { useEffect, useState } from "react";
 import GoalMarketComponent from "../components/GoalMarketComponent";
 import { getSession, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import introJs from "intro.js";
+import "intro.js/introjs.css";
 
 function GoalMarket({ user, ...props }) {
   const router = useRouter();
-
   const { data: session } = useSession();
   const [email, setEmail] = useState("");
   const [goalsList, setGoals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [usersId, setUserId] = useState("");
   const [showStepGoal, setShowStepGoal] = useState(false);
+  const [render, setRender] = useState(0);
 
   const {
     isStepGoal = false,
@@ -23,9 +25,7 @@ function GoalMarket({ user, ...props }) {
   //screen size check and automatic redirect to home page if screen is too small
   useEffect(() => {
     const handleResize = () => {
-      // console.log("handleResize called");
       const windowLength = window.innerWidth;
-      // console.log("window length:", windowLength);
       if (!isShowGoalMarket && windowLength <= 768) {
         router.push("/");
       } else if (windowLength > 768 && isShowGoalMarket) {
@@ -45,11 +45,6 @@ function GoalMarket({ user, ...props }) {
       setShowStepGoal(false);
     }
   }
-
-  // Indicates if the component has rendered at least once,
-  // to prevent fetching data before all the user's information is available
-
-  const [render, setRender] = useState(0);
 
   // Extract the user's name from the user object passed in as a prop
   const { username: usersName } = user || { username: null };
@@ -92,6 +87,105 @@ function GoalMarket({ user, ...props }) {
     hideStepGoalForSmallScreeans();
   }, [isStepGoal]);
 
+  const largeScreenTureForGoal = [
+    {
+      element: "#large-screen-home-button",
+      intro: "Click on this button to go to your profile page",
+      dataIntro: "large-screen-home-button",
+    },
+    {
+      element: "#showGoals",
+      intro: "Goal disply.",
+      dataIntro: "showGoals",
+    },
+    {
+      element: "#showStepGoals",
+      intro: "Step goal disply.",
+      dataIntro: "showStepGoals",
+    },
+  ];
+
+  const FirstTureForGoal = [
+    {
+      element: "#shared-screen-plus-button",
+      intro: "This button adds goals for you. Click it to get started.",
+      dataIntro: "shared-screen-plus-button",
+    },
+  ];
+
+  const SecondTureForGoal = [
+    {
+      element: "#SeeGoals",
+      intro: "Click here to add steps for your goal.",
+      dataIntro: "SeeGoals",
+    },
+    {
+      element: "#EditGoal",
+      intro: "Click here to edit your goal.",
+      dataIntro: "EditGoal",
+    },
+    {
+      element: "#DeleteGoal",
+      intro: "Click here to delete your goal.",
+      dataIntro: "DeleteGoal",
+    },
+    {
+      element: "#AchievedGoal",
+      intro: "Click here to mark as achieved your goal.",
+      dataIntro: "AchievedGoal",
+    },
+  ];
+
+  useEffect(() => {
+    const screenWidth = typeof window !== "undefined" && window.innerWidth;
+
+    const hasTourBeenPlayedForLargeScreensFirst =
+      screenWidth > 768 && "hasTourBeenPlayedForLargeScreensFirst";
+
+    const hasTourBeenPlayedFirstTime = localStorage.getItem(
+      hasTourBeenPlayedForLargeScreensFirst
+    );
+
+    const hasTourBeenPlayedForLargeScreensSecond =
+      screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecond";
+
+    const hasTourBeenPlayedSecondTime = localStorage.getItem(
+      hasTourBeenPlayedForLargeScreensSecond
+    );
+
+    const showTour = (steps) => {
+      const timerId = setTimeout(() => {
+        introJs().setOptions({ steps }).start();
+      }, 300);
+      return () => clearTimeout(timerId);
+    };
+
+    if (!hasTourBeenPlayedFirstTime && user?.goals?.length === 0) {
+      const steps = screenWidth > 768 ? largeScreenTureForGoal : [];
+      showTour([...steps, ...FirstTureForGoal]);
+      localStorage.setItem(hasTourBeenPlayedForLargeScreensFirst, true);
+    }
+
+    if (
+      !hasTourBeenPlayedSecondTime &&
+      !hasTourBeenPlayedFirstTime &&
+      user?.goals?.length > 0
+    ) {
+      const steps = screenWidth > 768 ? largeScreenTureForGoal : [];
+      showTour([...steps, ...FirstTureForGoal, ...SecondTureForGoal]);
+      localStorage.setItem(hasTourBeenPlayedForLargeScreensSecond, true);
+    }
+
+    if (
+      !hasTourBeenPlayedSecondTime &&
+      hasTourBeenPlayedFirstTime &&
+      goalsList?.length > 0
+    ) {
+      showTour(SecondTureForGoal);
+      localStorage.setItem(hasTourBeenPlayedForLargeScreensSecond, true);
+    }
+  }, [goalsList, user]);
+
   return (
     <>
       {loading ? (
@@ -108,7 +202,12 @@ function GoalMarket({ user, ...props }) {
             <div className="hidden md:sm:block">
               <p className="uppercase">Welcome {usersName}! </p>
               <img src={user.image} style={{ borderRadius: "50px" }} />
-              <button onClick={() => router.push("/")}>Home page</button>
+              <button
+                id="large-screen-home-button"
+                onClick={() => router.push("/")}
+              >
+                Home page
+              </button>
             </div>
             <GoalMarketComponent
               isStepGoal={isStepGoal}
@@ -119,6 +218,8 @@ function GoalMarket({ user, ...props }) {
               setGoals={setGoals}
               usersId={usersId}
               email={email}
+              // numTourPlay={numForTour}
+              // setNumTourPlay={setnNumTourPlay}
             />
           </div>
         </>

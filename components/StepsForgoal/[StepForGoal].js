@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import styles from "../../styles/StepGoal.module.css";
-import AddStepPopup from "./Popup";
 import EditStep from "./EditStep";
 
 export default function StepForGoal({
   goals,
   deleteStepFromGoal,
-  addStepToGoal,
   selectedGoalId,
   updateStep,
 }) {
   const [editingStep, setEditingStep] = useState(-1);
-  const [newStep, setNewStep] = useState("");
-  const [isFormOpen, setIsFormOpen] = useState(false);
+
   const startEditing = (index) => {
     setEditingStep(index);
   };
@@ -23,24 +20,7 @@ export default function StepForGoal({
   const deleteStepForGoal = (index) => {
     deleteStepFromGoal(selectedGoalId, index);
   };
-  function generateRandomString() {
-    const length = 24;
-    const characters =
-      "67890123456789012345678901234567890123456789012345670123456789";
-    let result = "";
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
-    return result;
-  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addStepToGoal(selectedGoalId, newStep, false, generateRandomString());
-    setNewStep("");
-    setIsFormOpen(false);
-  };
   return (
     <div className={styles.container}>
       <ul className={styles.list}>
@@ -59,6 +39,7 @@ export default function StepForGoal({
                           <input
                             type="checkbox"
                             checked={step.achieved}
+                            id="AchievedStep"
                             onChange={(event) =>
                               updateStep(selectedGoalId, step.stepId, {
                                 title: step.title,
@@ -84,12 +65,14 @@ export default function StepForGoal({
                                 <button
                                   className={`${styles.editBtn} py-2 px-4`}
                                   onClick={() => startEditing(index)}
+                                  id="EditStep"
                                 >
                                   Edit
                                 </button>
                                 <button
                                   className={`${styles.cancelBtn} py-2 px-4`}
                                   onClick={() => deleteStepForGoal(step.stepId)}
+                                  id="DeleteStep"
                                 >
                                   Delete
                                 </button>
@@ -107,28 +90,6 @@ export default function StepForGoal({
           </div>
         ))}
       </ul>
-
-      <div>
-        <button
-          className={styles.circleAddButton}
-          onClick={() => setIsFormOpen(true)}
-        >
-          +
-        </button>
-      </div>
-      {isFormOpen && (
-        <AddStepPopup
-          handleClose={() => setIsFormOpen(false)}
-          handleSubmit={(e) => {
-            handleSubmit(e);
-            setNewStep("");
-          }}
-          handleInputChange={(e) => setNewStep(e.target.value)}
-          inputValue={newStep}
-          dateValue={""}
-          setIsFormOpen={setIsFormOpen}
-        />
-      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "primeicons/primeicons.css";
 import { BsFillTrashFill } from "react-icons/bs";
 import { TbEditCircle } from "react-icons/tb";
+import EditGoal from "./EditGoal";
 
 const ShowGoal = ({
   handleDeleteGoal,
@@ -30,16 +31,8 @@ const ShowGoal = ({
     setEditedTitle("");
   };
 
-  const goalAchieved = async (goal, index) => {
-    setSelectedGoalId(goal.IdForGoal);
-    handleGoalUpdate(selectedGoalId, goal.title, event.target.checked);
-  };
-
-  const saveEditedGoalTitle = (event, goal, editedTitle) => {
-    event.preventDefault();
-    setSelectedGoalId(goal.IdForGoal);
-    handleGoalUpdate(selectedGoalId, editedTitle, goal.achieved);
-    cancelEditing();
+  const goalAchieved = async (goal) => {
+    handleGoalUpdate(goal.IdForGoal, goal.title, event.target.checked);
   };
 
   const showStepsForGoal = (goal) => {
@@ -80,40 +73,29 @@ const ShowGoal = ({
                 filter: "brightness(60%)",
               }}
             >
-              <input
-                type="checkbox"
-                checked={goal.achieved}
-                className="w-20 h-4 outline-none cursor-pointer relative"
-                onChange={() => {
-                  goalAchieved(goal, index);
-                }}
-              />
-
+              <div className=" inline-block">
+                <input
+                  type="checkbox"
+                  checked={goal.achieved}
+                  id="AchievedGoal"
+                  className="outline-none cursor-pointer relative"
+                  onChange={() => {
+                    goalAchieved(goal, index);
+                  }}
+                />
+              </div>
               {editingIndex === index ? (
-                <form>
-                  <input
-                    type="text"
-                    style={{ backgroundColor: "white" }}
-                    value={editedTitle}
-                    onChange={(event) => setEditedTitle(event.target.value)}
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      saveEditedGoalTitle(event, goal, editedTitle)
-                    }
-                  >
-                    Save
-                  </button>
-
-                  <br />
-                  <button type="button" onClick={cancelEditing}>
-                    Cancel
-                  </button>
-                </form>
+                <EditGoal
+                  goal={goal}
+                  cancelEditing={cancelEditing}
+                  editedTitle={editedTitle}
+                  setEditedTitle={setEditedTitle}
+                  handleGoalUpdate={handleGoalUpdate}
+                />
               ) : (
                 <>
                   <div
+                    id="SeeGoals"
                     onClick={() => {
                       if (editingIndex === -1 && selectedGoalId !== goal.id) {
                         showStepsForGoal(goal);
@@ -134,11 +116,11 @@ const ShowGoal = ({
                   >
                     <button onClick={() => startEditing(index, goal.title)}>
                       <i className="ti ti-EditCircle"></i>
-                      <TbEditCircle />
+                      <TbEditCircle id="EditGoal" />
                     </button>
                     <button onClick={() => handleDeleteGoal(goal.IdForGoal)}>
                       <i className="bi bi-trash"></i>
-                      <BsFillTrashFill />
+                      <BsFillTrashFill id="DeleteGoal" />
                     </button>
                   </div>
                 </>
@@ -149,7 +131,7 @@ const ShowGoal = ({
         <div
           className={`${styles.noGoals} mt-10 flex items-center text-center sm:text-xl`}
         >
-          There are no goals to show! Click the add button to create a new goal.
+          There are no goals to show! Click the + button to create a new goal.
         </div>
       )}
     </div>

@@ -16,7 +16,7 @@ function PopupForm({
 
   return (
     <div
-      className={`grid grid-cols-1 gap-3 place-content-center ${styles.popupWrapper}`}
+      className={`${styles.popupWrapper}`}
     >
       <form onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.inputWrapper}>
