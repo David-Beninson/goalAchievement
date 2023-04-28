@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Steps from "./StepsForgoal/Steps";
 import MainGoal from "./MainGoalComponents/MainGoal";
 
@@ -67,16 +67,13 @@ function GoalMarket({
 
   // Handle goal editing
   const handleGoalUpdate = async (id, title, achieved) => {
-    const response = await fetch(
-      `/api/mainGoal/${selectedGoalId}/edit/${usersId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id, title, achieved }),
-      }
-    );
+    const response = await fetch(`/api/mainGoal/${id}/edit/${usersId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, title, achieved }),
+    });
     if (!response.ok) {
       console.error("Error updating goal:", response.statusText);
     } else {
@@ -176,6 +173,7 @@ function GoalMarket({
         />
       </div>
       <div
+        id="showStepGoals"
         className={`overflow-y-auto w-screen px-4 bg-gray-200 relative min-w-md md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "" : "hidden"
         }`}
