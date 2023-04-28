@@ -16,6 +16,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
     "formik": "^2.2.9",
+    "intro.js": "^7.0.1",
     "mongodb-provider": "^0.1.1",
     "mongoose": "^7.0.3",
     "next": "13.3.0",
