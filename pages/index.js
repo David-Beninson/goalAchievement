@@ -246,83 +246,82 @@ function User({
   numGoalsAchieved,
 }) {
   return (
-    <>
-      <main className="container text-center py-20">
-        <h3 className={`${styles.h3} text-4xl uppercase`}>
-          Welcome Back -
-          <br /> {username}!
-        </h3>
+    <main className="container text-center py-20">
+      <h3 className={`${styles.h3} text-4xl uppercase`}>
+        Welcome Back,
+        <br />
+        {username}!
+      </h3>
 
-        <div className={`${styles.details} my-10`}>
-          <div>
-            {" "}
-            <div>
-              {!numGoals ? (
-                <p className="text-sm" id="all-screens-no-goals-message">
-                  It's a good time to start setting goals. You don't have any
-                  yet.
-                </p>
-              ) : (
-                <h5
-                  className="text-lg uppercase"
-                  id="all-screens-goals-message"
-                >
-                  You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
-                  {numGoals !== 0 ? "" : " yet"}.
-                </h5>
-              )}
-              <br />
-              <br />
-              <p className="text-sm" id="all-screens-goals-achieved-message">
-                {numGoalsAchieved && numGoals
-                  ? `${numGoalsAchieved} of them have been achieved.`
-                  : ""}
-              </p>
-            </div>
-          </div>
+      <div className={`${styles.details} my-10`}>
+        <div>
+          {!numGoals ? (
+            <p className="text-sm" id="all-screens-no-goals-message">
+              It's a good time to start setting goals. You don't have any yet.
+            </p>
+          ) : (
+            <h5 className="text-lg uppercase" id="all-screens-goals-message">
+              You have {numGoals} goal{numGoals !== 1 ? "s" : ""}
+              {numGoals !== 0 ? "" : " yet"}.
+            </h5>
+          )}
 
-          <br />
-
-          <div className="py-5">
-            <button
-              className="inline-block md:hidden lg:hidden"
-              onClick={() => {
-                toggleGoalMarket();
-              }}
-              id="small-goals-element-goal-market"
-            >
-              Press here to see your goals
-            </button>
-          </div>
-
-          <div>
-            <h4
-              className="text-gray-400 uppercase"
-              id="small-goals-element-email"
-            >
-              Sign in with: {email}
-            </h4>
-          </div>
+          { numGoals && (
+            <p className="text-sm" id="all-screens-goals-achieved-message">
+              {numGoalsAchieved} of them have been achieved.
+            </p>
+          )}
         </div>
 
-        <div className="flex justify-center">
+        <br />
+
+        <div className="py-5">
           <button
-            onClick={handleSignOut}
-            className={`px-6 py-3 mt-5 mr-4 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
-            id="large-screen-sign-out-button"
+            className="inline-block md:hidden lg:hidden"
+            onClick={toggleGoalMarket}
+            id="small-goals-element-goal-market"
           >
-            Sign Out
+            See Your Goals
           </button>
-          <a
-            href="/GoalMarket"
-            className={`px-6 py-3 mt-5 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
-            id="large-screen-profile-page-link"
-          >
-            Profile Page
-          </a>
         </div>
-      </main>
-    </>
+
+        <div>
+          <h4
+            className="text-gray-400 uppercase"
+            id="small-goals-element-email"
+          >
+            Sign in with: {email}
+          </h4>
+        </div>
+      </div>
+
+      <button
+        onClick={() => {
+          localStorage.clear();
+          location.reload();
+        }}
+      >
+        Take a Tour
+      </button>
+
+      <div className="flex justify-center">
+        <button
+          onClick={handleSignOut}
+          className={`px-6 py-3 mt-5 mr-4 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
+          id="large-screen-sign-out-button"
+        >
+          Sign Out
+        </button>
+
+        <a
+          href="/GoalMarket"
+          className={`px-6 py-3 mt-5 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
+          id="large-screen-profile-page-link"
+        >
+          Profile Page
+        </a>
+      </div>
+    </main>
   );
 }
 
