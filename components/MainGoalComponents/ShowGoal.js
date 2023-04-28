@@ -37,6 +37,7 @@ const ShowGoal = ({
 
   const saveEditedGoalTitle = (event, goal, editedTitle) => {
     event.preventDefault();
+    setSelectedGoalId(goal.IdForGoal);
     handleGoalUpdate(selectedGoalId, editedTitle, goal.achieved);
     cancelEditing();
   };
