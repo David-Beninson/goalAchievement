@@ -90,7 +90,8 @@ export default function Home({ user }) {
   ];
 
   useEffect(() => {
-    const startTour = () => {
+    const startTour = async () => {
+      if (typeof window === "undefined") return;
       const screenWidth = window.innerWidth;
 
       const hasTourBeenPlayedKey =
@@ -102,17 +103,14 @@ export default function Home({ user }) {
       if (!hasTourBeenPlayed) {
         const steps =
           screenWidth < 768 ? smallScreenIntroSteps : largeScreenIntroSteps;
-        setTimeout(() => {
-          introJs().setOptions({ steps }).start();
-          localStorage.setItem(hasTourBeenPlayedKey, true);
-        }, 300);
-        // setNumTourPlay(1);
+
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        introJs().setOptions({ steps }).start();
+        localStorage.setItem(hasTourBeenPlayedKey, true);
       }
     };
 
-    if (typeof window !== "undefined") {
-      startTour();
-    }
+    startTour();
   }, []);
 
   if (!session) {

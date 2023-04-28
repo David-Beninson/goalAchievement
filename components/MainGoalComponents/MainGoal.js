@@ -23,30 +23,23 @@ export default function MainGoal(props) {
   } = props;
 
   useEffect(() => {
-    const startTour = () => {
-      if (showAddGoalForm) {
-        const dataIntrohasTourBeenPlayedAddMainGoalKey =
-          "hasTourBeenPlayedForAddMainGoal";
-        const hasTourBeenPlayedForAddGoal = localStorage.getItem(
-          dataIntrohasTourBeenPlayedAddMainGoalKey
-        );
+    const startTour = async () => {
+      if (!showAddGoalForm) return;
 
-        if (!hasTourBeenPlayedForAddGoal) {
-          setTimeout(() => {
-            introJs().setOptions().start();
-            localStorage.setItem(
-              dataIntrohasTourBeenPlayedAddMainGoalKey,
-              true
-            );
-          }, 300);
-        }
+      const dataIntrohasTourBeenPlayedAddMainGoalKey =
+        "hasTourBeenPlayedForAddMainGoal";
+      const hasTourBeenPlayedForAddGoal = localStorage.getItem(
+        dataIntrohasTourBeenPlayedAddMainGoalKey
+      );
+
+      if (!hasTourBeenPlayedForAddGoal) {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        introJs().setOptions().start();
+        localStorage.setItem(dataIntrohasTourBeenPlayedAddMainGoalKey, true);
       }
     };
 
-    // Check if window object is available before calling the startTour function
-    if (typeof window !== "undefined") {
-      startTour();
-    }
+    startTour();
   }, [showAddGoalForm]);
 
   const addGoalForm = showAddGoalForm && (

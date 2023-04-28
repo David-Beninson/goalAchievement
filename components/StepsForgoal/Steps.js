@@ -62,75 +62,82 @@ export default function Steps({
       dataIntro: "AchievedStep",
     },
   ];
+  // useEffect(() => {
+  //   const screenWidth = typeof window !== "undefined" && window.innerWidth;
 
-  useEffect(() => {
-    const screenWidth = typeof window !== "undefined" && window.innerWidth;
+  //   const isTourBeenPlayedFirstTimeForSteps =
+  //     screenWidth > 768 && "isTourBeenPlayedFirstTimeForSteps";
 
-    const sthasTourBeenPlayedFirstTimeForSteps =
-      screenWidth > 768 && "sthasTourBeenPlayedFirstTimeForSteps";
+  //   const hasTourBeenPlayedForLargeScreensSecondForSteps =
+  //     screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecondForSteps";
 
-    const hasTourBeenPlayedFirstTimeForSteps = localStorage.getItem(
-      sthasTourBeenPlayedFirstTimeForSteps
-    );
+  //   const hasTourBeenPlayedSecondTimeForSteps = localStorage.getItem(
+  //     hasTourBeenPlayedForLargeScreensSecondForSteps
+  //   );
 
-    const hasTourBeenPlayedForLargeScreensSecondForSteps =
-      screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecondForSteps";
+  //   const hasTourBeenPlayedForLargeScreensSecond = localStorage.getItem(
+  //     "hasTourBeenPlayedForLargeScreensSecond"
+  //   );
+  //   const hasTourBeenPlayedFirstTimeForSteps = localStorage.getItem(
+  //     "hasTourBeenPlayedFirstTimeForSteps"
+  //   );
 
-    const hasTourBeenPlayedSecondTimeForSteps = localStorage.getItem(
-      hasTourBeenPlayedForLargeScreensSecondForSteps
-    );
+  //   const isTourPlayedForLargeScreensSecond =
+  //     hasTourBeenPlayedForLargeScreensSecond === "true";
+  //   const isTourPlayedFirstTimeForSteps =
+  //     hasTourBeenPlayedFirstTimeForSteps === "true";
 
-    const isSteps = () => {
-      for (let i = 0; i < goals.length; i++) {
-        if (goals[i].steps) {
-          setStepExist(true);
-          break;
-        }
-      }
-    };
-    isSteps();
+  //   const isSteps = () => {
+  //     for (let i = 0; i < goals.length; i++) {
+  //       if (goals[i].steps) {
+  //         setStepExist(true);
+  //         break;
+  //       }
+  //     }
+  //   };
+  //   isSteps();
 
-    const startTourForSteps = (steps) => {
-      const timerId = setTimeout(() => {
-        introJs().setOptions({ steps }).start();
-      }, 300);
-      return () => clearTimeout(timerId);
-    };
+  //   const startTourForSteps = (steps) => {
+  //     const timerId = setTimeout(() => {
+  //       introJs().setOptions({ steps }).start();
+  //     }, 300);
+  //     return () => clearTimeout(timerId);
+  //   };
 
-      if (showStepGoal) {
-        if (!hasTourBeenPlayedFirstTimeForSteps) {
-          const steps = FirstTureForSteps;
-          startTourForSteps(steps);
-          localStorage.setItem(sthasTourBeenPlayedFirstTimeForSteps, true);
-        }
+  //   if (showStepGoal) {
+  //     if (!hasTourBeenPlayedFirstTimeForSteps) {
+  //       const steps = FirstTureForSteps;
+  //       startTourForSteps(steps);
+  //       localStorage.setItem(isTourBeenPlayedFirstTimeForSteps, true);
+  //     }
 
-        if (
-          !hasTourBeenPlayedSecondTimeForSteps &&
-          hasTourBeenPlayedFirstTimeForSteps &&
-          stepExist
-        ) {
-          const steps = SecondTureForSteps;
-          startTourForSteps(steps);
-          localStorage.setItem(
-            hasTourBeenPlayedForLargeScreensSecondForSteps,
-            true
-          );
-        }
+  //     if (
+  //       !hasTourBeenPlayedSecondTimeForSteps &&
+  //       hasTourBeenPlayedFirstTimeForSteps &&
+  //       stepExist
+  //     ) {
+  //       const steps = SecondTureForSteps;
+  //       startTourForSteps(steps);
+  //       localStorage.setItem(
+  //         hasTourBeenPlayedForLargeScreensSecondForSteps,
+  //         true
+  //       );
+  //     }
 
-        if (
-          !hasTourBeenPlayedSecondTimeForSteps &&
-          !hasTourBeenPlayedFirstTimeForSteps &&
-          stepExist
-        ) {
-          const steps = [...FirstTureForSteps, ...SecondTureForSteps];
-          startTourForSteps(steps);
-          localStorage.setItem(
-            hasTourBeenPlayedForLargeScreensSecondForSteps,
-            true
-          );
-        }
-      }
-  }, [goals, showStepGoal]);
+  //     if (
+  //       !hasTourBeenPlayedSecondTimeForSteps &&
+  //       !hasTourBeenPlayedFirstTimeForSteps &&
+  //       stepExist
+  //     ) {
+  //       const steps = [...FirstTureForSteps, ...SecondTureForSteps];
+  //       startTourForSteps(steps);
+  //       localStorage.setItem(
+  //         hasTourBeenPlayedForLargeScreensSecondForSteps,
+  //         true
+  //       );
+  //     }
+  //   }
+  // }, [goals, showStepGoal]);
 
   return (
     <div>
