@@ -61,7 +61,7 @@ const ShowGoal = ({
           .sort((a, b) => a.achieved - b.achieved)
           .map((goal, index) => (
             <div
-              className="grid grid-cols-3 items-center text-center py-4 pr-2 m-8 mx-auto font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
+              className="grid grid-cols-3 items-center text-center py-4 px-16 m-8 font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
               key={goal.id}
               onDrop={handleDrop}
               onDragOver={(event) => event.preventDefault()}

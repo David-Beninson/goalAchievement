@@ -104,7 +104,7 @@ export default function Home({ user }) {
         const steps =
           screenWidth < 768 ? smallScreenIntroSteps : largeScreenIntroSteps;
 
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 450));
         introJs().setOptions({ steps }).start();
         localStorage.setItem(hasTourBeenPlayedKey, true);
       }
@@ -266,7 +266,7 @@ function User({
             </h5>
           )}
 
-          { numGoals && (
+          {numGoals && (
             <p className="text-sm" id="all-screens-goals-achieved-message">
               {numGoalsAchieved} of them have been achieved.
             </p>

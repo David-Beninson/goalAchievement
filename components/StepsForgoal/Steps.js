@@ -100,7 +100,7 @@ export default function Steps({
   //   const startTourForSteps = (steps) => {
   //     const timerId = setTimeout(() => {
   //       introJs().setOptions({ steps }).start();
-  //     }, 300);
+  //     }, 450);
   //     return () => clearTimeout(timerId);
   //   };
 

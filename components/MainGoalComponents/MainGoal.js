@@ -33,7 +33,7 @@ export default function MainGoal(props) {
       );
 
       if (!hasTourBeenPlayedForAddGoal) {
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 450));
         introJs().setOptions().start();
         localStorage.setItem(dataIntrohasTourBeenPlayedAddMainGoalKey, true);
       }
