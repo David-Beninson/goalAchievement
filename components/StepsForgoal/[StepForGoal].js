@@ -61,7 +61,7 @@ export default function StepForGoal({
                               <span className="flex items-center sm:pl-4">
                                 {step.title}
                               </span>
-                              <div className="grid lg:md:grid-cols-2 sm:grid-cols-1 gap-2 place-items-end">
+                              <div className="grid grid-cols-2 gap-2 place-items-end">
                                 <button
                                   className={`${styles.editBtn} py-2 px-4`}
                                   onClick={() => startEditing(index)}
