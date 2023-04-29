@@ -33,7 +33,7 @@ export default function StepForGoal({
                     return (
                       <div
                         key={step.id}
-                        className={`flex bg-white mt-3 rounded-md p-3 `}
+                        className={`shadow-lg bg-white mt-3 rounded-md p-4 break-words`}
                       >
                         <li className={styles.checkboxItem}>
                           <input
@@ -57,11 +57,11 @@ export default function StepForGoal({
                               achieved={step.achieved}
                             />
                           ) : (
-                            <div className="flex justify-between">
-                              <span className="flex items-center">
+                            <div className="flex">
+                              <span className="flex items-center sm:pl-4">
                                 {step.title}
                               </span>
-                              <div className="grid grid-cols-2 gap-8 place-items-end ">
+                              <div className="grid lg:md:grid-cols-2 sm:grid-cols-1 gap-2 place-items-end">
                                 <button
                                   className={`${styles.editBtn} py-2 px-4`}
                                   onClick={() => startEditing(index)}

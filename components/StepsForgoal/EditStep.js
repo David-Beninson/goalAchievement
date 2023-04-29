@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import styles from "../../styles/StepGoal.module.css";
 
 const EditStep = ({
@@ -13,7 +13,7 @@ const EditStep = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    updateStep(goalId, id, { title: newTitle , achieved});
+    updateStep(goalId, id, { title: newTitle, achieved });
     finishEditing();
   };
   const handleInputChange = (e) => {
@@ -32,7 +32,7 @@ const EditStep = ({
         <button className={styles.btn} type="submit">
           Save
         </button>
-        <button className={styles.cancelBtn}>Cancel</button>
+        <button className={`py-2 px-4 ${styles.cancelBtn}`}>Cancel</button>
       </form>
     </>
   );

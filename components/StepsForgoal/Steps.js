@@ -16,7 +16,7 @@ export default function Steps({
 }) {
   const [newStep, setNewStep] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [stepExist, setStepExist] = useState(false);
+  // const [stepExist, setStepExist] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,31 +37,33 @@ export default function Steps({
     return result;
   }
 
-  const FirstTureForSteps = [
-    {
-      element: "#Add-Button-For-Goals",
-      intro: "This button adds Steps for your goal. Click it to get started.",
-      dataIntro: "Add-Button-For-Goals",
-    },
-  ];
+  // Setting tour for future
 
-  const SecondTureForSteps = [
-    {
-      element: "#EditStep",
-      intro: "Click here to edit the step.",
-      dataIntro: "EditStep",
-    },
-    {
-      element: "#DeleteStep",
-      intro: "Click here to delete the step.",
-      dataIntro: "DeleteStep",
-    },
-    {
-      element: "#AchievedStep",
-      intro: "Click here to mark as achieved the step.",
-      dataIntro: "AchievedStep",
-    },
-  ];
+  // const FirstTureForSteps = [
+  //   {
+  //     element: "#Add-Button-For-Goals",
+  //     intro: "This button adds Steps for your goal. Click it to get started.",
+  //     dataIntro: "Add-Button-For-Goals",
+  //   },
+  // ];
+
+  // const SecondTureForSteps = [
+  //   {
+  //     element: "#EditStep",
+  //     intro: "Click here to edit the step.",
+  //     dataIntro: "EditStep",
+  //   },
+  //   {
+  //     element: "#DeleteStep",
+  //     intro: "Click here to delete the step.",
+  //     dataIntro: "DeleteStep",
+  //   },
+  //   {
+  //     element: "#AchievedStep",
+  //     intro: "Click here to mark as achieved the step.",
+  //     dataIntro: "AchievedStep",
+  //   },
+  // ];
   // useEffect(() => {
   //   const screenWidth = typeof window !== "undefined" && window.innerWidth;
 
@@ -150,7 +152,7 @@ export default function Steps({
           Select a goal from the list
         </div>
       ) : (
-        <div>
+        <div className="h-4/5 ">
           <div>
             <h3 className="flex justify-center">
               Add a new step for {selectedGoalTitle}:
@@ -177,7 +179,7 @@ export default function Steps({
             />
           )}
           <div
-            className={`mt-10 overflow-y-auto h-full ${styles.showSteoGoalForm}`}
+            className={`min-w-md mt-10 overflow-y-auto ${styles.showStepGoalForm}`}
           >
             <StepForGoal
               selectedGoalId={selectedGoalId}

@@ -61,7 +61,9 @@ const ShowGoal = ({
           .sort((a, b) => a.achieved - b.achieved)
           .map((goal, index) => (
             <div
-              className="grid grid-cols-3 items-center text-center py-4 m-8 font-medium break-words -space-8 uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg"
+              className={`overflow-x-hidden grid grid-cols-4 gap-4 items-center text-center py-4 m-8 font-medium break-words uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg ${
+                goal.achieved ? " text-yellow-200 bg-rose-600" : ""
+              }`}
               key={goal.id}
               onDrop={handleDrop}
               onDragOver={(event) => event.preventDefault()}
@@ -73,7 +75,7 @@ const ShowGoal = ({
                 filter: "brightness(60%)",
               }}
             >
-              <div className=" inline-block">
+              <div className="inline-block">
                 <input
                   type="checkbox"
                   checked={goal.achieved}
@@ -102,9 +104,7 @@ const ShowGoal = ({
                       }
                     }}
                   >
-                    <p className={`${goal.achieved ? "line-through" : ""}`}>
-                      {goal.title}
-                    </p>
+                    <p>{goal.title}</p>
                   </div>
                   <div
                     style={{
