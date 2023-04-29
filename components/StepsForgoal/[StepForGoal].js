@@ -39,6 +39,7 @@ export default function StepForGoal({
                           <input
                             type="checkbox"
                             checked={step.achieved}
+                            className="outline-none cursor-pointer h-10 w-10 relative"
                             id="AchievedStep"
                             onChange={(event) =>
                               updateStep(selectedGoalId, step.stepId, {
