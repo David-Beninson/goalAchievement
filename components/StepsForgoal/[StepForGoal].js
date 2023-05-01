@@ -35,11 +35,10 @@ export default function StepForGoal({
                         key={step.id}
                         className={`shadow-lg bg-white mt-3 rounded-md p-4 break-words`}
                       >
-                        <li className={styles.checkboxItem}>
+                        <li>
                           <input
                             type="checkbox"
                             checked={step.achieved}
-                            className="outline-none cursor-pointer h-10 w-10 relative"
                             id="AchievedStep"
                             onChange={(event) =>
                               updateStep(selectedGoalId, step.stepId, {
