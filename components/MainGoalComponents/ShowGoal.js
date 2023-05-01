@@ -92,6 +92,7 @@ const ShowGoal = ({
                     : " bg-yellow-400 "
                 }`}
                 key={goal.id}
+                id="SeeGoals"
                 onClick={() => {
                   if (editingIndex === -1 && selectedGoalId !== goal.id) {
                     showStepsForGoal(goal);
