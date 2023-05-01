@@ -103,7 +103,7 @@ const ShowGoal = ({
                   {editingIndex === index && (
                     <div className={`${edit ? "" : "hidden"} `}>
                       <EditGoal
-                        goal={goals}
+                        goal={goal}
                         cancelEditing={cancelEditing}
                         editedTitle={editedTitle}
                         setEditedTitle={setEditedTitle}
