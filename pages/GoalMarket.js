@@ -134,6 +134,11 @@ function GoalMarket({ user, ...props }) {
       intro: "Click here to mark as achieved your goal.",
       dataIntro: "AchievedGoal",
     },
+    {
+      element: "#SeeDescription",
+      intro: "Hover over here to see the goal's description.",
+      dataIntro: "SeeDescription",
+    },
   ];
 
   useEffect(() => {
@@ -209,7 +214,7 @@ function GoalMarket({ user, ...props }) {
                 Home page
               </button>
             </div>
-            <div className="flex flex-col">
+            <div className="">
               <GoalMarketComponent
                 isStepGoal={isStepGoal}
                 setIsStepGoal={setIsStepGoal}

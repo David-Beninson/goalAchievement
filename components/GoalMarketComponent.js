@@ -33,13 +33,21 @@ function GoalMarket({
     const form = event.target;
     const IdForGoal = generateId();
     const title = form.title.value;
+    const description = form.description.value;
     const achieved = form.achieved ? form.achieved.checked : false;
     const response = await fetch(`/api/mainGoal/${usersId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ IdForGoal, title, achieved, steps: [], usersId }),
+      body: JSON.stringify({
+        IdForGoal,
+        title,
+        description,
+        achieved,
+        steps: [],
+        usersId,
+      }),
     });
     if (!response.ok) {
       console.error("Error adding goal:", response.statusText);
@@ -174,7 +182,7 @@ function GoalMarket({
       </div>
       <div
         id="showStepGoals"
-        className={`overflow-y-auto w-screen px-4 bg-red-100 relative min-w-md md:w-3/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
+        className={`overflow-y-auto w-screen px-4 bg-teal-50 relative min-w-md md:w-3/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "" : "hidden"
         }`}
       >

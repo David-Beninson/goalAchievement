@@ -24,12 +24,13 @@ export async function deleteGoal(req, res) {
 
 export async function addGoal(req, res) {
   const { db } = await connectToDatabase();
-  const { IdForGoal, title, achieved } = req.body;
+  const { IdForGoal, title, achieved, description } = req.body;
   const { userId } = req.query;
   const newGoal = {
     IdForGoal,
     title,
     achieved,
+    description,
     steps: [],
   };
 

@@ -43,33 +43,50 @@ export default function MainGoal(props) {
   }, [showAddGoalForm]);
 
   const addGoalForm = showAddGoalForm && (
-    <form onSubmit={handleAddGoal}>
-      <div className={styles.popupWrapper} data-intro="add goal form">
+    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white shadow-lg rounded-lg p-8 mx-4">
         <button
+          className="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-900"
           onClick={() => setShowAddGoalForm(false)}
-          className={styles.closeBtn}
-          data-intro="close button"
         >
-          Close
+          X
         </button>
-        <input
-          className="border-2 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          id="input"
-          type="text"
-          name="title"
-          placeholder="Add an end goal"
-          data-intro="add goal input"
-          required
-        />
-        <button
-          className={styles.goalButton}
-          data-intro="add goal button"
-          type="submit"
-        >
-          Add
-        </button>
+        <form onSubmit={handleAddGoal}>
+          <h2 className="text-2xl font-bold mb-4">Add Goal</h2>
+          <label htmlFor="title" className="block font-medium mb-2">
+            Title
+          </label>
+          <input
+            className="border border-gray-400 rounded-md py-2 px-3 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="title"
+            type="text"
+            name="title"
+            placeholder="Enter goal title"
+            required
+          />
+          <label
+            name="description"
+            id="description"
+            htmlFor="description"
+            className="block font-medium mb-2"
+          >
+            Description
+          </label>
+          <textarea
+            className="border border-gray-400 rounded-md py-2 px-3 w-full mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            id="description"
+            name="description"
+            placeholder="Enter goal description"
+          ></textarea>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+          >
+            Add
+          </button>
+        </form>
       </div>
-    </form>
+    </div>
   );
 
   return (
@@ -87,7 +104,7 @@ export default function MainGoal(props) {
           </button>
         </div>
         <div
-          className={`min-w-md mt-16 flex flex-col overflow-y-auto ${styles.showGoalForm}`}
+          className={`min-w-md mt-24 flex flex-col overflow-y-auto ${styles.showGoalForm}`}
           id="showGoals"
         >
           <ShowGoal
