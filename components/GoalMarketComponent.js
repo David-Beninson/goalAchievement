@@ -150,7 +150,7 @@ function GoalMarket({
       className={`min-w-md ${"md:h-4/5 md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-full flex flex-wrap bg-white`}
     >
       <div
-        className={`flex flex-col min-w-md ${"md:w-1/3"} p-2 ${
+        className={`overflow-y-auto w-screen px-4 relative min-w-md md:w-2/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "hidden md:block" : ""
         }`}
       >
@@ -174,7 +174,7 @@ function GoalMarket({
       </div>
       <div
         id="showStepGoals"
-        className={`overflow-y-auto w-screen px-4 bg-gray-200 relative min-w-md md:w-2/3 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
+        className={`overflow-y-auto w-screen px-4 bg-red-100 relative min-w-md md:w-3/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "" : "hidden"
         }`}
       >

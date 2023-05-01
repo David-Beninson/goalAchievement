@@ -19,15 +19,17 @@ const ShowGoal = ({
 }) => {
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedTitle, setEditedTitle] = useState("");
-  const [bgImage, setBgImage] = useState("");
+  const [edit, setEdit] = useState(false);
 
   const startEditing = (index, title) => {
     setEditingIndex(index);
+    setEdit(true);
     setEditedTitle(title);
   };
 
   const cancelEditing = () => {
     setEditingIndex(-1);
+    setEdit(false);
     setEditedTitle("");
   };
 
@@ -44,37 +46,13 @@ const ShowGoal = ({
     }
   };
 
-  const handleDrop = (event) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      setBgImage(reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
   return (
     <div>
       {goals.length > 0 ? (
         goals
           .sort((a, b) => a.achieved - b.achieved)
           .map((goal, index) => (
-            <div
-              className={`overflow-x-hidden grid grid-cols-4 gap-4 items-center text-center py-4 m-8 font-medium break-words uppercase bg-opacity-4 bg-gray-100 rounded-lg cursor-pointer shadow-lg ${
-                goal.achieved ? " text-yellow-200 bg-rose-600" : ""
-              }`}
-              key={goal.id}
-              onDrop={handleDrop}
-              onDragOver={(event) => event.preventDefault()}
-              style={{
-                backgroundImage: `url(${bgImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                backgroundRepeat: "no-repeat",
-                filter: "brightness(60%)",
-              }}
-            >
+            <div key={goal.IdForGoal} className="flex items-center">
               <div className="inline-block">
                 <input
                   type="checkbox"
@@ -86,45 +64,56 @@ const ShowGoal = ({
                   }}
                 />
               </div>
-              {editingIndex === index ? (
-                <EditGoal
-                  goal={goal}
-                  cancelEditing={cancelEditing}
-                  editedTitle={editedTitle}
-                  setEditedTitle={setEditedTitle}
-                  handleGoalUpdate={handleGoalUpdate}
-                />
-              ) : (
-                <>
-                  <div
-                    id="SeeGoals"
-                    onClick={() => {
-                      if (editingIndex === -1 && selectedGoalId !== goal.id) {
-                        showStepsForGoal(goal);
-                      }
-                    }}
-                  >
-                    <p>{goal.title}</p>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-end",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <button onClick={() => startEditing(index, goal.title)}>
-                      <i className="ti ti-EditCircle"></i>
-                      <TbEditCircle id="EditGoal" />
-                    </button>
-                    <button onClick={() => handleDeleteGoal(goal.IdForGoal)}>
-                      <i className="bi bi-trash"></i>
-                      <BsFillTrashFill id="DeleteGoal" />
-                    </button>
-                  </div>
-                </>
-              )}
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "center",
+                  gap: "0.5rem",
+                  marginLeft: "1rem",
+                }}
+              >
+                <button onClick={() => startEditing(index, goal.title)}>
+                  <i className="ti ti-EditCircle"></i>
+                  <TbEditCircle id="EditGoal" />
+                </button>
+                <button onClick={() => handleDeleteGoal(goal.IdForGoal)}>
+                  <i className="bi bi-trash"></i>
+                  <BsFillTrashFill id="DeleteGoal" />
+                </button>
+              </div>
+
+              <div
+                className={`grid grid-cols-2 gap-4 items-center px-2 py-4 m-4 w-full font-medium break-words uppercase bg-opacity-4 rounded-lg cursor-pointer shadow-lg ${
+                  goal.achieved
+                    ? "text-yellow-400 bg-rose-600 line-through"
+                    : " bg-yellow-400 "
+                }`}
+                key={goal.id}
+                onClick={() => {
+                  if (editingIndex === -1 && selectedGoalId !== goal.id) {
+                    showStepsForGoal(goal);
+                  }
+                }}
+              >
+                <div className="col-span-2">
+                  {editingIndex === index && (
+                    <div className={`${edit ? "" : "hidden"} `}>
+                      <EditGoal
+                        goal={goals}
+                        cancelEditing={cancelEditing}
+                        editedTitle={editedTitle}
+                        setEditedTitle={setEditedTitle}
+                        handleGoalUpdate={handleGoalUpdate}
+                      />
+                    </div>
+                  )}
+
+                  <p className="text-black">{goal.title}</p>
+                </div>
+              </div>
             </div>
           ))
       ) : (

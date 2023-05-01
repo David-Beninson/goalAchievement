@@ -198,7 +198,7 @@ function GoalMarket({ user, ...props }) {
           <Head>
             <title>{usersName}'s Goals Board</title>
           </Head>
-          <div className="lg:h-screen overflow-y-hidden">
+          <div className=" lg:h-screen overflow-y-hidden">
             <div className="hidden md:sm:block">
               <p className="uppercase">Welcome {usersName}! </p>
               <img src={user.image} style={{ borderRadius: "50px" }} />
@@ -209,18 +209,18 @@ function GoalMarket({ user, ...props }) {
                 Home page
               </button>
             </div>
-            <GoalMarketComponent
-              isStepGoal={isStepGoal}
-              setIsStepGoal={setIsStepGoal}
-              showStepGoal={showStepGoal}
-              setShowStepGoal={setShowStepGoal}
-              goals={goalsList}
-              setGoals={setGoals}
-              usersId={usersId}
-              email={email}
-              // numTourPlay={numForTour}
-              // setNumTourPlay={setnNumTourPlay}
-            />
+            <div className="flex flex-col">
+              <GoalMarketComponent
+                isStepGoal={isStepGoal}
+                setIsStepGoal={setIsStepGoal}
+                showStepGoal={showStepGoal}
+                setShowStepGoal={setShowStepGoal}
+                goals={goalsList}
+                setGoals={setGoals}
+                usersId={usersId}
+                email={email}
+              />
+            </div>
           </div>
         </>
       )}

@@ -77,6 +77,7 @@ export default function MainGoal(props) {
       <div>
         <div className="absolute">
           <h6 className="text-sky-500 text-center hidden sm:block">My Goals</h6>
+          <h3 className="flex justify-center">Add a New Goal</h3>
           <button
             className={styles.circleAddButton}
             onClick={() => setShowAddGoalForm(!showAddGoalForm)}
