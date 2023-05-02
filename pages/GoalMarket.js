@@ -144,7 +144,7 @@ function GoalMarket({ user, ...props }) {
   const SecondTureForSmallScreen = [
     {
       element: "#SeeDescription",
-      intro: "Long tuch here to see the goal's description.",
+      intro: "Touch around to view the goal's description.",
       dataIntro: "SeeDescription",
     },
   ];
@@ -161,15 +161,8 @@ function GoalMarket({ user, ...props }) {
     const hasTourBeenPlayedForLargeScreensSecond =
       screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecond";
 
-    const hasTourBeenPlayedForSmallScreensSecond =
-      screenWidth < 768 && "hasTourBeenPlayedForSmallScreensSecond";
-
     const hasTourBeenPlayedSecondTime = localStorage.getItem(
       hasTourBeenPlayedForLargeScreensSecond
-    );
-
-    const hasTourBeenPlayedSecondTimeSmallScreans = localStorage.getItem(
-      hasTourBeenPlayedForSmallScreensSecond
     );
 
     const showTour = (steps) => {
@@ -190,7 +183,8 @@ function GoalMarket({ user, ...props }) {
       !hasTourBeenPlayedFirstTime &&
       user?.goals?.length > 0
     ) {
-      const steps = screenWidth > 768 ? largeScreenTureForGoal : SecondTureForSmallScreen;
+      const steps =
+        screenWidth > 768 ? largeScreenTureForGoal : SecondTureForSmallScreen;
       showTour([...steps, ...FirstTureForGoal, ...SecondTureForGoal]);
       localStorage.setItem(hasTourBeenPlayedForLargeScreensSecond, true);
     }

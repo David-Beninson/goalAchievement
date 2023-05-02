@@ -1,10 +1,11 @@
 import styles from "../../styles/Goal.module.css";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "primeicons/primeicons.css";
 import { BsFillTrashFill } from "react-icons/bs";
 import { TbEditCircle } from "react-icons/tb";
 import EditGoal from "./EditGoal";
-import { Tooltip, OverlayTrigger } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { OverlayTrigger, Popover } from "react-bootstrap";
 
 const ShowGoal = ({
   handleDeleteGoal,
@@ -21,7 +22,9 @@ const ShowGoal = ({
   const [editingIndex, setEditingIndex] = useState(-1);
   const [editedTitle, setEditedTitle] = useState("");
   const [edit, setEdit] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
+
+  const screenWidth = typeof window !== "undefined" && window.innerWidth;
+  const placement = screenWidth > 768 ? "right" : "top";
 
   const startEditing = (index, title) => {
     setEditingIndex(index);
@@ -48,14 +51,6 @@ const ShowGoal = ({
     }
   };
 
-  const handleTouchStart = () => {
-    setShowTooltip(true);
-  };
-
-  const handleTouchEnd = () => {
-    setShowTooltip(false);
-  };
-
   return (
     <div>
       {goals.length > 0 ? (
@@ -64,20 +59,21 @@ const ShowGoal = ({
           .map((goal, index) => (
             <div id="SeeDescription" key={goal.IdForGoal}>
               <OverlayTrigger
-                key={goal.IdForGoal}
-                placement="top"
+                trigger={["hover", "focus", "click"]}
+                placement={placement}
                 overlay={
-                  <Tooltip
-                    onTouchStart={handleTouchStart}
-                    onTouchEnd={handleTouchEnd}
-                    className="px-2 py-1 bg-blue-500 text-white text-sm rounded-lg shadow-lg"
-                    id={`tooltip-${goal.IdForGoal}`}
-                    key={goal.IdForGoal + 1}
+                  <Popover
+                    id="popover-basic"
+                    className=" shadow-lg"
+                    key={goal.IdForGoal}
                   >
-                    {goal.description
-                      ? goal.description
-                      : "There is no description here"}
-                  </Tooltip>
+                    <Popover.Header as="h3">{goal.title}</Popover.Header>
+                    <Popover.Body>
+                      <strong>{goal.description}</strong>
+                      {goal.steps &&
+                        `You have ${goal.steps.length} steps for the goal.`}
+                    </Popover.Body>
+                  </Popover>
                 }
               >
                 <div key={goal.IdForGoal} className="flex items-center">

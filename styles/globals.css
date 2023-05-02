@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+html body {
   background-color: #e4d4d4;
 }
 
-@media (max-width: 400px) {
-  body {
+@media (max-width: 768px) {
+  html body {
     background-color: white;
   }
 }
