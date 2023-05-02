@@ -16,7 +16,7 @@ export default function Steps({
 }) {
   const [newStep, setNewStep] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
-  // const [stepExist, setStepExist] = useState(false);
+  const [stepExist, setStepExist] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,107 +39,133 @@ export default function Steps({
 
   // Setting tour for future
 
-  // const FirstTureForSteps = [
-  //   {
-  //     element: "#Add-Button-For-Goals",
-  //     intro: "This button adds Steps for your goal. Click it to get started.",
-  //     dataIntro: "Add-Button-For-Goals",
-  //   },
-  // ];
+  const FirstTureForSteps = [
+    {
+      element: "#Add-Button-For-Goals",
+      intro: "This button adds Steps for your goal. Click it to get started.",
+      dataIntro: "Add-Button-For-Goals",
+    },
+  ];
 
-  // const SecondTureForSteps = [
-  //   {
-  //     element: "#EditStep",
-  //     intro: "Click here to edit the step.",
-  //     dataIntro: "EditStep",
-  //   },
-  //   {
-  //     element: "#DeleteStep",
-  //     intro: "Click here to delete the step.",
-  //     dataIntro: "DeleteStep",
-  //   },
-  //   {
-  //     element: "#AchievedStep",
-  //     intro: "Click here to mark as achieved the step.",
-  //     dataIntro: "AchievedStep",
-  //   },
-  // ];
-  // useEffect(() => {
-  //   const screenWidth = typeof window !== "undefined" && window.innerWidth;
+  const SecondTureForSteps = [
+    {
+      element: "#EditStep",
+      intro: "Click here to edit the step.",
+      dataIntro: "EditStep",
+    },
+    {
+      element: "#DeleteStep",
+      intro: "Click here to delete the step.",
+      dataIntro: "DeleteStep",
+    },
+    {
+      element: "#AchievedStep",
+      intro: "Click here to mark as achieved the step.",
+      dataIntro: "AchievedStep",
+    },
+  ];
 
-  //   const isTourBeenPlayedFirstTimeForSteps =
-  //     screenWidth > 768 && "isTourBeenPlayedFirstTimeForSteps";
+  useEffect(() => {
+    const screenWidth = window.innerWidth;
+    const hasTourBeenPlayedForSmallScreens = localStorage.getItem(
+      "hasTourBeenPlayedForSmallScreens"
+    );
+    const hasTourBeenPlayedForLargeScreensSecond = localStorage.getItem(
+      "hasTourBeenPlayedForLargeScreensSecond"
+    );
+    const hasTourBeenPlayedFirstTimeForLargeScreensInSteps =
+      "hasTourBeenPlayedFirstTimeForLargeScreensInSteps";
+    const hasTourBeenPlayedFirstTimeForSmallScreensInSteps =
+      "hasTourBeenPlayedFirstTimeForSmallScreensInSteps";
+    const hasTourBeenPlayedSecondTimeForLargeScreensInSteps =
+      "hasTourBeenPlayedSecondTimeForLargeScreensInSteps";
+    const hasTourBeenPlayedSecondTimeForSmallScreensInSteps =
+      "hasTourBeenPlayedSecondTimeForSmallScreensInSteps";
 
-  //   const hasTourBeenPlayedForLargeScreensSecondForSteps =
-  //     screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecondForSteps";
+    const isSteps = () => {
+      return goals.some((goal) => goal.steps);
+    };
 
-  //   const hasTourBeenPlayedSecondTimeForSteps = localStorage.getItem(
-  //     hasTourBeenPlayedForLargeScreensSecondForSteps
-  //   );
+    const startTourForSteps = (steps) => {
+      const timerId = setTimeout(() => {
+        introJs().setOptions({ steps }).start();
+      }, 450);
+      return () => clearTimeout(timerId);
+    };
 
-  //   const hasTourBeenPlayedForLargeScreensSecond = localStorage.getItem(
-  //     "hasTourBeenPlayedForLargeScreensSecond"
-  //   );
-  //   const hasTourBeenPlayedFirstTimeForSteps = localStorage.getItem(
-  //     "hasTourBeenPlayedFirstTimeForSteps"
-  //   );
+    const shouldStartTour = (
+      hasTourBeenPlayedFirstTime,
+      hasTourBeenPlayedSecondTime,
+      screenType
+    ) => {
+      if (!isSteps()) {
+        return false;
+      }
 
-  //   const isTourPlayedForLargeScreensSecond =
-  //     hasTourBeenPlayedForLargeScreensSecond === "true";
-  //   const isTourPlayedFirstTimeForSteps =
-  //     hasTourBeenPlayedFirstTimeForSteps === "true";
+      if (
+        screenWidth <= 768 &&
+        hasTourBeenPlayedForSmallScreens === "true" &&
+        hasTourBeenPlayedSecondTime === "true"
+      ) {
+        return hasTourBeenPlayedFirstTime === "true";
+      }
 
-  //   const isSteps = () => {
-  //     for (let i = 0; i < goals.length; i++) {
-  //       if (goals[i].steps) {
-  //         setStepExist(true);
-  //         break;
-  //       }
-  //     }
-  //   };
-  //   isSteps();
+      if (
+        screenWidth > 768 &&
+        hasTourBeenPlayedForLargeScreensSecond === "true"
+      ) {
+        return (
+          hasTourBeenPlayedFirstTime === "true" ||
+          hasTourBeenPlayedSecondTime === "true"
+        );
+      }
 
-  //   const startTourForSteps = (steps) => {
-  //     const timerId = setTimeout(() => {
-  //       introJs().setOptions({ steps }).start();
-  //     }, 450);
-  //     return () => clearTimeout(timerId);
-  //   };
+      return false;
+    };
 
-  //   if (showStepGoal) {
-  //     if (!hasTourBeenPlayedFirstTimeForSteps) {
-  //       const steps = FirstTureForSteps;
-  //       startTourForSteps(steps);
-  //       localStorage.setItem(isTourBeenPlayedFirstTimeForSteps, true);
-  //     }
+    if (showStepGoal) {
+      const hasTourBeenPlayedFirstTimeLargeScreensInSteps =
+        localStorage.getItem(hasTourBeenPlayedFirstTimeForLargeScreensInSteps);
+      const hasTourBeenPlayedFirstTimeSmallScreensInSteps =
+        localStorage.getItem(hasTourBeenPlayedFirstTimeForSmallScreensInSteps);
+      const hasTourBeenPlayedSecondTimeLargeScreensInSteps =
+        localStorage.getItem(hasTourBeenPlayedSecondTimeForLargeScreensInSteps);
+      const hasTourBeenPlayedSecondTimeSmallScreensInSteps =
+        localStorage.getItem(hasTourBeenPlayedSecondTimeForSmallScreensInSteps);
+      const shouldStartTourForLargeScreens = shouldStartTour(
+        hasTourBeenPlayedFirstTimeLargeScreensInSteps,
+        hasTourBeenPlayedSecondTimeLargeScreensInSteps,
+        "large"
+      );
+      const shouldStartTourForSmallScreens = shouldStartTour(
+        hasTourBeenPlayedFirstTimeSmallScreensInSteps,
+        hasTourBeenPlayedSecondTimeSmallScreensInSteps,
+        "small"
+      );
 
-  //     if (
-  //       !hasTourBeenPlayedSecondTimeForSteps &&
-  //       hasTourBeenPlayedFirstTimeForSteps &&
-  //       stepExist
-  //     ) {
-  //       const steps = SecondTureForSteps;
-  //       startTourForSteps(steps);
-  //       localStorage.setItem(
-  //         hasTourBeenPlayedForLargeScreensSecondForSteps,
-  //         true
-  //       );
-  //     }
-
-  //     if (
-  //       !hasTourBeenPlayedSecondTimeForSteps &&
-  //       !hasTourBeenPlayedFirstTimeForSteps &&
-  //       stepExist
-  //     ) {
-  //       const steps = [...FirstTureForSteps, ...SecondTureForSteps];
-  //       startTourForSteps(steps);
-  //       localStorage.setItem(
-  //         hasTourBeenPlayedForLargeScreensSecondForSteps,
-  //         true
-  //       );
-  //     }
-  //   }
-  // }, [goals, showStepGoal]);
+      if (shouldStartTourForLargeScreens) {
+        if (!shouldStartTourForSmallScreens) {
+          startTourForSteps(FirstTureForSteps);
+          localStorage.setItem(
+            hasTourBeenPlayedFirstTimeForLargeScreensInSteps,
+            true
+          );
+        } else {
+          startTourForSteps(SecondTureForSteps);
+          localStorage.setItem(
+            hasTourBeenPlayedSecondTimeLargeScreensInSteps,
+            true
+          );
+        }
+      } else if (shouldStartTourForSmallScreens) {
+        startTourForSteps(FirstTureForSteps);
+        localStorage.setItem(
+          hasTourBeenPlayedFirstTimeForSmallScreensInSteps,
+          true
+        );
+      }
+    }
+  }, [goals, showStepGoal]);
 
   return (
     <div>

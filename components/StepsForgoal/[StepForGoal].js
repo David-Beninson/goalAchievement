@@ -22,24 +22,21 @@ export default function StepForGoal({
   };
 
   return (
-    <div className={styles.container}>
-      <ul className={styles.list}>
+    <section className={`${styles.container}`}>
+      <ul>
         {goals.map((goal) => (
-          <div>
-            <ul>
+          <li className={`${styles.goalItem}`} key={goal.goalId}>
+            <ul className={`${styles.stepslist}`}>
               {goal.steps &&
                 goal.steps.map((step, index) => {
                   if (selectedGoalId === goal.IdForGoal) {
                     return (
-                      <div
-                        key={step.id}
-                        className={`shadow-lg bg-white mt-3 rounded-md p-4 break-words`}
-                      >
-                        <li>
+                      <li className={`${styles.stepItem}`} key={step.stepId}>
+                        <label className={`${styles.stepLabel}`}>
                           <input
                             type="checkbox"
                             checked={step.achieved}
-                            id="AchievedStep"
+                            className={`${styles.stepcheckbox}`}
                             onChange={(event) =>
                               updateStep(selectedGoalId, step.stepId, {
                                 title: step.title,
@@ -47,49 +44,45 @@ export default function StepForGoal({
                               })
                             }
                           />
-                          {editingStep === index ? (
-                            <EditStep
-                              finishEditing={finishEditing}
-                              goalId={selectedGoalId}
-                              id={step.stepId}
-                              updateStep={updateStep}
-                              title={step.title}
-                              achieved={step.achieved}
-                            />
-                          ) : (
-                            <div className="flex">
-                              <span className="flex items-center sm:pl-4">
-                                {step.title}
-                              </span>
-                              <div className="grid grid-cols-2 gap-2 place-items-end">
-                                <button
-                                  className={`${styles.editBtn} py-2 px-4`}
-                                  onClick={() => startEditing(index)}
-                                  id="EditStep"
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  className={`${styles.cancelBtn} py-2 px-4`}
-                                  onClick={() => deleteStepForGoal(step.stepId)}
-                                  id="DeleteStep"
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </div>
-                          )}
-                        </li>
-                      </div>
+                          <span className={`${styles.stepTitle}`}>
+                            {step.title}
+                          </span>
+                        </label>
+                        {editingStep === index ? (
+                          <EditStep
+                            finishEditing={finishEditing}
+                            goalId={selectedGoalId}
+                            id={step.stepId}
+                            updateStep={updateStep}
+                            title={step.title}
+                            achieved={step.achieved}
+                          />
+                        ) : (
+                          <div className={`${styles.stepActions}`}>
+                            <button
+                              onClick={() => startEditing(index)}
+                              className={`${styles.editStepButton}`}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deleteStepForGoal(step.stepId)}
+                              className={`${styles.deleteStepButton}`}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        )}
+                      </li>
                     );
                   } else {
                     return null;
                   }
                 })}
             </ul>
-          </div>
+          </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
