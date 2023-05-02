@@ -103,6 +103,11 @@ function GoalMarket({ user, ...props }) {
       intro: "Step goal disply.",
       dataIntro: "showStepGoals",
     },
+    {
+      element: "#SeeDescription",
+      intro: "Hover over here to see the goal's description.",
+      dataIntro: "SeeDescription",
+    },
   ];
 
   const FirstTureForGoal = [
@@ -134,13 +139,15 @@ function GoalMarket({ user, ...props }) {
       intro: "Click here to mark as achieved your goal.",
       dataIntro: "AchievedGoal",
     },
+  ];
+
+  const SecondTureForSmallScreen = [
     {
       element: "#SeeDescription",
-      intro: "Hover over here to see the goal's description.",
+      intro: "Long tuch here to see the goal's description.",
       dataIntro: "SeeDescription",
     },
   ];
-
   useEffect(() => {
     const screenWidth = typeof window !== "undefined" && window.innerWidth;
 
@@ -154,8 +161,15 @@ function GoalMarket({ user, ...props }) {
     const hasTourBeenPlayedForLargeScreensSecond =
       screenWidth > 768 && "hasTourBeenPlayedForLargeScreensSecond";
 
+    const hasTourBeenPlayedForSmallScreensSecond =
+      screenWidth < 768 && "hasTourBeenPlayedForSmallScreensSecond";
+
     const hasTourBeenPlayedSecondTime = localStorage.getItem(
       hasTourBeenPlayedForLargeScreensSecond
+    );
+
+    const hasTourBeenPlayedSecondTimeSmallScreans = localStorage.getItem(
+      hasTourBeenPlayedForSmallScreensSecond
     );
 
     const showTour = (steps) => {
@@ -176,7 +190,7 @@ function GoalMarket({ user, ...props }) {
       !hasTourBeenPlayedFirstTime &&
       user?.goals?.length > 0
     ) {
-      const steps = screenWidth > 768 ? largeScreenTureForGoal : [];
+      const steps = screenWidth > 768 ? largeScreenTureForGoal : SecondTureForSmallScreen;
       showTour([...steps, ...FirstTureForGoal, ...SecondTureForGoal]);
       localStorage.setItem(hasTourBeenPlayedForLargeScreensSecond, true);
     }
@@ -184,9 +198,10 @@ function GoalMarket({ user, ...props }) {
     if (
       !hasTourBeenPlayedSecondTime &&
       hasTourBeenPlayedFirstTime &&
-      goalsList?.length > 0
+      user?.goals?.length > 0
     ) {
-      showTour(SecondTureForGoal);
+      const steps = screenWidth < 768 ? SecondTureForSmallScreen : [];
+      showTour([...SecondTureForGoal, ...steps]);
       localStorage.setItem(hasTourBeenPlayedForLargeScreensSecond, true);
     }
   }, [goalsList, user]);
