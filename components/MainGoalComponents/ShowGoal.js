@@ -57,7 +57,11 @@ const ShowGoal = ({
         goals
           .sort((a, b) => a.achieved - b.achieved)
           .map((goal, index) => (
-            <div id="SeeDescription" key={goal.IdForGoal}>
+            <div
+              className="m-auto pr-20 min-w-full"
+              id="SeeDescription"
+              key={goal.IdForGoal}
+            >
               <OverlayTrigger
                 trigger={["hover", "focus", "click"]}
                 placement={placement}
@@ -107,9 +111,8 @@ const ShowGoal = ({
                       <BsFillTrashFill id="DeleteGoal" />
                     </button>
                   </div>
-
                   <div
-                    className={`grid grid-cols-2 gap-4 items-center px-2 py-4 m-4 w-full font-medium break-words uppercase bg-opacity-4 rounded-lg cursor-pointer shadow-lg ${
+                    className={`grid grid-cols-2 gap-8 items-center py-4 m-3 text-center w-full min-w-full font-medium break-words uppercase bg-opacity-4 rounded-lg cursor-pointer shadow-lg ${
                       goal.achieved
                         ? "text-yellow-400 bg-rose-600 line-through"
                         : " bg-yellow-400 "

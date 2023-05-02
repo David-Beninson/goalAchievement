@@ -46,10 +46,10 @@ export default function MainGoal(props) {
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white shadow-lg rounded-lg p-8 mx-4">
         <button
-          className="absolute top-0 right-0 mt-4 mr-4 text-gray-600 hover:text-gray-900"
+          className="absolute top-16 right-16 mt-4 mr-4 text-black"
           onClick={() => setShowAddGoalForm(false)}
         >
-          X
+          Close
         </button>
         <form onSubmit={handleAddGoal}>
           <h2 className="text-2xl font-bold mb-4">Add Goal</h2>
@@ -104,7 +104,7 @@ export default function MainGoal(props) {
           </button>
         </div>
         <div
-          className={`min-w-md mt-24 flex flex-col overflow-y-auto ${styles.showGoalForm}`}
+          className={`min-w-md mt-24 flex flex-col overflow-y-auto min-h-full min-w-full ${styles.showGoalForm}`}
           id="showGoals"
         >
           <ShowGoal
