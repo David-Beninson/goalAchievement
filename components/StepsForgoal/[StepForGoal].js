@@ -28,57 +28,68 @@ export default function StepForGoal({
           <li className={`${styles.goalItem}`} key={goal.goalId}>
             <ul className={`${styles.stepslist}`}>
               {goal.steps &&
-                goal.steps.map((step, index) => {
-                  if (selectedGoalId === goal.IdForGoal) {
-                    return (
-                      <li className={`${styles.stepItem}`} key={step.stepId}>
-                        <label className={`${styles.stepLabel}`}>
-                          <input
-                            type="checkbox"
-                            checked={step.achieved}
-                            className={`${styles.stepcheckbox}`}
-                            onChange={(event) =>
-                              updateStep(selectedGoalId, step.stepId, {
-                                title: step.title,
-                                achieved: event.target.checked,
-                              })
-                            }
-                          />
-                          <span className={`${styles.stepTitle}`}>
-                            {step.title}
-                          </span>
-                        </label>
-                        {editingStep === index ? (
-                          <EditStep
-                            finishEditing={finishEditing}
-                            goalId={selectedGoalId}
-                            id={step.stepId}
-                            updateStep={updateStep}
-                            title={step.title}
-                            achieved={step.achieved}
-                          />
-                        ) : (
-                          <div className={`${styles.stepActions}`}>
-                            <button
-                              onClick={() => startEditing(index)}
-                              className={`${styles.editStepButton}`}
+                goal.steps
+                  .sort((a, b) => a.achieved - b.achieved)
+                  .map((step, index) => {
+                    if (selectedGoalId === goal.IdForGoal) {
+                      return (
+                        <li
+                          className={`${
+                            step.achieved ? styles.achieved : styles.stepItem
+                          }`}
+                          key={step.stepId}
+                        >
+                          <label className={`${styles.stepLabel}`}>
+                            <input
+                              type="checkbox"
+                              checked={step.achieved}
+                              className={`${styles.stepcheckbox}`}
+                              onChange={(event) =>
+                                updateStep(selectedGoalId, step.stepId, {
+                                  title: step.title,
+                                  achieved: event.target.checked,
+                                })
+                              }
+                            />
+                            <span
+                              className={`${styles.stepTitle} ${
+                                step.achieved ? "line-through" : ""
+                              }`}
                             >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => deleteStepForGoal(step.stepId)}
-                              className={`${styles.deleteStepButton}`}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
-                      </li>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
+                              {step.title}
+                            </span>
+                          </label>
+                          {editingStep === index ? (
+                            <EditStep
+                              finishEditing={finishEditing}
+                              goalId={selectedGoalId}
+                              id={step.stepId}
+                              updateStep={updateStep}
+                              title={step.title}
+                              achieved={step.achieved}
+                            />
+                          ) : (
+                            <div className={`${styles.stepActions}`}>
+                              <button
+                                onClick={() => startEditing(index)}
+                                className={`${styles.editStepButton}`}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => deleteStepForGoal(step.stepId)}
+                                className={`${styles.deleteStepButton}`}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </li>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
             </ul>
           </li>
         ))}

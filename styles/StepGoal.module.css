@@ -56,11 +56,6 @@
   background-color: #bbdf6d;
 }
 
-.stepItem {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
 
 .stepLabel {
   display: flex;
@@ -68,15 +63,15 @@
   flex-grow: 1;
 }
 
-.stepCheckBox {
-  margin-right: 10px;
-}
-
 .stepTitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
   flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: center;
 }
 
 .stepActions {
@@ -105,17 +100,35 @@
 }
 
 /* New style rules */
-
 .stepItem {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 20px;
 }
 
 .stepItem:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.achieved {
+  background-color: #5cb85c;
+  content: "\2713";
+  font-size: 14px;
+  color: #fff;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 20px;
 }
 
 .stepCheckBox {
@@ -142,11 +155,6 @@
   color: #fff;
 }
 
-.stepTitle {
-  font-size: 18px;
-  font-weight: 500;
-  color: #333;
-}
 
 .editStepButton {
   background-color: #0070f3;
