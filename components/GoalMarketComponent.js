@@ -75,6 +75,20 @@ function GoalMarket({
 
   // Handle goal editing
   const handleGoalUpdate = async (id, title, achieved) => {
+    const currentGoal = goals.find((goal) => goal.IdForGoal === id);
+    const hasUnachievedStep = currentGoal.steps.some((step) => !step.achieved);
+    if (
+      hasUnachievedStep &&
+      !currentGoal.achieved &&
+      achieved !== currentGoal.achieved
+    ) {
+      const confirmResult = window.confirm(
+        `There is at least one unachieved step in this goal. Are you sure you want to mark ${currentGoal.title}  as achieved?`
+      );
+      if (!confirmResult) {
+        return;
+      }
+    }
     const response = await fetch(`/api/mainGoal/${id}/edit/${usersId}`, {
       method: "PUT",
       headers: {
@@ -158,7 +172,7 @@ function GoalMarket({
       className={`min-w-md ${" md:rounded-lg md:shadow-lg md:w-8/12"} rounded-t-lg m-auto w-full flex flex-wrap bg-white`}
     >
       <div
-        className={`overflow-y-auto px-10 relative min-w-md md:w-2/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
+        className={`overflow-y-hidden md:pb-24 px-10 relative min-w-md md:w-2/5 md:max-h-50vh md:min-h-full md:flex md:flex-col md:p-4 md:sm:block md:rounded-r-lg min-h-screen sm:min-h-full ${
           showStepGoal ? "hidden md:block" : ""
         }`}
       >
