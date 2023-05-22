@@ -315,7 +315,7 @@ function User({
 
         <a
           href="/GoalMarket"
-          className={`px-6 py-3 mt-5 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
+          className={` no-underline px-6 py-3 mt-5 text-lg font-medium text-white bg-indigo-500 rounded-md hover:bg-indigo-600 hidden md:inline-block lg:inline-block`}
           id="large-screen-profile-page-link"
         >
           Profile Page
