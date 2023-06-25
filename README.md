@@ -12,7 +12,7 @@ Additionally, it is worth mentioning that the Task Manager web application is fu
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/davidbeninson/task_manager`
+1. Clone the repository: `git clone https://github.com/David-Beninson/goalAchievement.git`
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
 
