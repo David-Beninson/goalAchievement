@@ -11,7 +11,7 @@ export default function ProgressRing({ percentage, size = 64, strokeWidth = 6, c
       <svg width={size} height={size} className="transform -rotate-90">
         {/* Background Ring */}
         <circle
-          stroke="rgba(255, 255, 255, 0.05)"
+          stroke="rgba(0, 0, 0, 0.05)"
           strokeWidth={strokeWidth}
           fill="transparent"
           r={radius}

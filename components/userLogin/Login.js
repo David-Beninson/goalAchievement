@@ -45,13 +45,13 @@ const Login = () => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card w-full max-w-md p-10 space-y-8 relative overflow-hidden"
+        className="glass-card w-full max-w-md p-10 space-y-8 relative overflow-hidden bg-white/95"
       >
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-purple-500" />
         
         <div className="text-center space-y-2">
-          <h1 className="text-4xl font-black tracking-tight text-white">Welcome Back</h1>
-          <p className="text-muted-foreground font-medium">Enter your credentials to access the forge.</p>
+          <h1 className="text-4xl font-black tracking-tight text-slate-900">Welcome Back</h1>
+          <p className="text-slate-500 font-medium">Enter your credentials to access your goals.</p>
         </div>
 
         <AnimatePresence>
@@ -60,7 +60,7 @@ const Login = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              className="bg-destructive/10 border border-destructive/20 text-destructive-foreground p-4 rounded-xl flex items-center gap-3 text-sm font-semibold"
+              className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl flex items-center gap-3 text-sm font-semibold"
             >
               <AlertCircle size={18} />
               {errorMessage}
@@ -70,37 +70,37 @@ const Login = () => {
 
         <form className="space-y-6" onSubmit={formik.handleSubmit}>
           <div className="space-y-2">
-            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2 px-1">
+            <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2 px-1">
               <AtSign size={14} className="text-primary" /> Email Address
             </label>
             <div className="relative group">
               <input
                 {...formik.getFieldProps("email")}
                 type="email"
-                placeholder="commander@nexus.com"
-                className={`w-full bg-white/5 border ${formik.errors.email && formik.touched.email ? 'border-destructive/50' : 'border-white/10'} rounded-xl px-4 py-3.5 outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-slate-600`}
+                placeholder="yours@email.com"
+                className={`w-full bg-slate-50 border-2 ${formik.errors.email && formik.touched.email ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-3.5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 text-slate-900 font-medium`}
               />
             </div>
             {formik.errors.email && formik.touched.email && (
-              <p className="text-[10px] font-bold text-destructive uppercase tracking-widest px-1">{formik.errors.email}</p>
+              <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest px-1">{formik.errors.email}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-black uppercase tracking-widest text-muted-foreground flex items-center gap-2 px-1">
-              <Lock size={14} className="text-primary" /> Security Key
+            <label className="text-xs font-black uppercase tracking-widest text-slate-500 flex items-center gap-2 px-1">
+              <Lock size={14} className="text-primary" /> Password
             </label>
             <div className="relative">
               <input
                 {...formik.getFieldProps("password")}
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
-                className={`w-full bg-white/5 border ${formik.errors.password && formik.touched.password ? 'border-destructive/50' : 'border-white/10'} rounded-xl px-4 py-3.5 outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-slate-600`}
+                className={`w-full bg-slate-50 border-2 ${formik.errors.password && formik.touched.password ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-3.5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 text-slate-900 font-medium`}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-white transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -110,24 +110,24 @@ const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-primary hover:bg-primary/90 text-white font-black py-4 rounded-xl shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-50"
+            className="w-full bg-primary hover:bg-primary/90 text-white font-black py-4 rounded-xl shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 group disabled:opacity-50"
           >
             {isLoading ? (
               <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin" />
             ) : (
               <>
                 <LogIn size={20} className="group-hover:translate-x-1 transition-transform" />
-                INITIATE LOGIN
+                SIGN IN
               </>
             )}
           </button>
         </form>
 
         <div className="text-center pt-4">
-          <p className="text-sm text-muted-foreground font-medium">
-            New to the Nexus?{" "}
+          <p className="text-sm text-slate-500 font-medium">
+            New here?{" "}
             <Link href="/SignUp" className="text-primary hover:underline font-bold">
-              Create Account
+              Create an Account
             </Link>
           </p>
         </div>

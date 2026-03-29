@@ -40,7 +40,7 @@ export default function Statistics() {
 
   if (loading) return (
     <Layout>
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-[80vh] flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
       </div>
     </Layout>
@@ -48,68 +48,82 @@ export default function Statistics() {
 
   return (
     <Layout>
-      <div className="space-y-12 pb-24">
+      <div className="space-y-12 pb-24 text-slate-900">
         <header>
           <h1 className="text-4xl font-black tracking-tight flex items-center gap-3">
              <BarChart2 className="text-primary" size={36} />
              Nexus Analytics
           </h1>
-          <p className="text-muted-foreground mt-2 tracking-wide font-medium italic">Deep-dive into your forge performance.</p>
+          <p className="text-slate-500 mt-2 tracking-wide font-medium italic opacity-80">Deep-dive into your forge performance.</p>
         </header>
 
         {/* Top Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-8 text-center bg-gradient-to-br from-primary/10 to-transparent">
-             <Zap className="mx-auto mb-4 text-primary" size={32} />
-             <p className="text-3xl font-black">{stats.xp}</p>
-             <p className="text-xs uppercase font-black tracking-widest text-muted-foreground">Total XP Harvested</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="glass-card p-8 text-center bg-white border-2 border-slate-100 shadow-xl shadow-slate-200/50">
+             <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 text-primary border-2 border-white shadow-lg">
+                <Zap size={28} />
+             </div>
+             <p className="text-4xl font-black tracking-tight text-slate-900">{stats.xp}</p>
+             <p className="text-xs uppercase font-black tracking-widest text-slate-400 mt-1">Total XP Harvested</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-8 text-center bg-gradient-to-br from-orange-500/10 to-transparent">
-             <Flame className="mx-auto mb-4 text-orange-400" size={32} />
-             <p className="text-3xl font-black">{stats.streak} Days</p>
-             <p className="text-xs uppercase font-black tracking-widest text-muted-foreground">Current Momentum</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="glass-card p-8 text-center bg-white border-2 border-slate-100 shadow-xl shadow-slate-200/50">
+             <div className="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center mx-auto mb-4 text-orange-500 border-2 border-white shadow-lg">
+                <Flame size={28} />
+             </div>
+             <p className="text-4xl font-black tracking-tight text-slate-900">{stats.streak} Days</p>
+             <p className="text-xs uppercase font-black tracking-widest text-slate-400 mt-1">Current Momentum</p>
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-8 text-center bg-gradient-to-br from-emerald-500/10 to-transparent">
-             <Award className="mx-auto mb-4 text-emerald-400" size={32} />
-             <p className="text-3xl font-black">Level {stats.level}</p>
-             <p className="text-xs uppercase font-black tracking-widest text-muted-foreground">Forge Rank</p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="glass-card p-8 text-center bg-white border-2 border-slate-100 shadow-xl shadow-slate-200/50">
+             <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4 text-emerald-500 border-2 border-white shadow-lg">
+                <Award size={28} />
+             </div>
+             <p className="text-4xl font-black tracking-tight text-slate-900">Level {stats.level}</p>
+             <p className="text-xs uppercase font-black tracking-widest text-slate-400 mt-1">Forge Rank</p>
           </motion.div>
         </div>
 
         {/* Charts Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="glass-card p-8 space-y-6">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <TrendingUp size={20} className="text-primary" /> Goal Completion Rate
+           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="glass-card p-8 space-y-6 bg-white border-2 border-slate-100">
+              <h3 className="text-2xl font-black flex items-center gap-3 tracking-tight">
+                <div className="p-2 bg-primary/10 rounded-xl text-primary border-2 border-white shadow-sm">
+                    <TrendingUp size={20} />
+                </div>
+                Goal Completion Rate
               </h3>
               <div className="h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={stats.completionByGoal}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                    <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} dy={10} />
+                    <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} dx={-10} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: "#0a0a0c", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px" }} 
-                      itemStyle={{ color: "#fff" }}
+                      cursor={{ fill: '#f8fafc' }}
+                      contentStyle={{ backgroundColor: "#ffffff", border: "2px solid #f1f5f9", borderRadius: "16px", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }} 
+                      itemStyle={{ color: "#0f172a", fontWeight: "bold" }}
+                      labelStyle={{ color: "#64748b", textTransform: "uppercase", fontSize: "10px", fontWeight: "900", letterSpacing: "0.1em", marginBottom: "4px" }}
                     />
-                    <Bar dataKey="completed" fill="#8B5CF6" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="completed" fill="#8B5CF6" radius={[6, 6, 0, 0]} barSize={40} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
            </motion.div>
 
-           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="glass-card p-8 space-y-6">
-              <h3 className="text-xl font-bold flex items-center gap-2">
-                <PieIcon size={20} className="text-primary" /> Priority Allocation
+           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="glass-card p-8 space-y-6 bg-white border-2 border-slate-100">
+              <h3 className="text-2xl font-black flex items-center gap-3 tracking-tight">
+                <div className="p-2 bg-primary/10 rounded-xl text-primary border-2 border-white shadow-sm">
+                    <PieIcon size={20} />
+                </div>
+                Priority Allocation
               </h3>
               <div className="h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={stats.priorityData}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={5}
+                      innerRadius={70}
+                      outerRadius={90}
+                      paddingAngle={8}
                       dataKey="value"
                     >
                       {stats.priorityData.map((entry, index) => (
@@ -117,10 +131,10 @@ export default function Statistics() {
                       ))}
                     </Pie>
                     <Tooltip 
-                       contentStyle={{ backgroundColor: "#0a0a0c", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px" }} 
-                       itemStyle={{ color: "#fff" }}
+                       contentStyle={{ backgroundColor: "#ffffff", border: "2px solid #f1f5f9", borderRadius: "16px", boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.1)" }} 
+                       itemStyle={{ color: "#0f172a", fontWeight: "bold" }}
                     />
-                    <Legend iconType="circle" wrapperStyle={{ paddingTop: "20px" }} />
+                    <Legend iconType="circle" wrapperStyle={{ paddingTop: "30px", fontWeight: "bold", fontSize: "12px", color: "#64748b" }} />
                   </PieChart>
                 </ResponsiveContainer>
               </div>

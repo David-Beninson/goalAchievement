@@ -7,12 +7,11 @@ export default function Layout({ children }) {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  // Define public routes
   const isPublicRoute = ["/Login", "/SignUp"].includes(router.pathname);
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen bg-[#0a0a0c] flex items-center justify-center">
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center">
         <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -36,7 +35,7 @@ export default function Layout({ children }) {
         <meta property="og:image:height" content="200" />
       </Head>
 
-      <div className="min-h-screen bg-[#0a0a0c] text-slate-200">
+      <div className="min-h-screen text-slate-900">
         {!isPublicRoute && session && <Sidebar />}
         
         <main className={`transition-all duration-500 ease-in-out ${!isPublicRoute && session ? "md:pl-72" : ""} p-6 md:p-12 min-h-screen`}>

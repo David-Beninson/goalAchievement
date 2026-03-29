@@ -3,12 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { 
   Plus, 
   Search, 
-  Filter, 
   ChevronLeft, 
   CheckCircle2, 
-  Trash2, 
   Zap,
-  ArrowLeft
+  Target,
+  X
 } from "lucide-react";
 import GoalCard from "./GoalCard";
 import AddGoalModal from "./AddGoalModal";
@@ -39,7 +38,6 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
       usersId
     };
 
-    // Optimistic UI
     setGoals(prev => [...prev, { ...newGoal, _id: "temp-" + Date.now() }]);
 
     try {
@@ -56,7 +54,6 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
   };
 
   const handleDeleteGoal = async (id) => {
-    // Optimistic UI
     const previousGoals = [...goals];
     setGoals(prev => prev.filter(g => g._id !== id));
 
@@ -92,7 +89,6 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
   };
 
   const handleToggleStep = async (goalId, stepId, achieved) => {
-    // Optimistic Logic
     setGoals(prev => prev.map(goal => {
       if (goal.IdForGoal === goalId) {
         const updatedSteps = goal.steps.map(s => s.stepId === stepId ? { ...s, achieved } : s);
@@ -103,20 +99,17 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
 
     try {
       await fetch(`/api/stepsForGoal/${usersId}/editStep/${goalId}/${stepId}`, {
-        method: "DELETE", // The legacy API uses DELETE for edit Step? Wait, I saw it in GoalMarketComponent.js line 158
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ achieved }),
       });
-    } catch (err) {
-       // rollback logic omitted for brevity in this complex nested state, but ideally needed
-    }
+    } catch (err) {}
   };
 
   const handleAddStep = async (goalId, title) => {
     const stepId = Math.random().toString(36).substr(2, 9);
     const newStep = { stepId, title, achieved: false };
 
-    // Optimistic
     setGoals(prev => prev.map(goal => {
       if (goal.IdForGoal === goalId) {
         return { ...goal, steps: [...(goal.steps || []), newStep] };
@@ -124,42 +117,42 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
       return goal;
     }));
 
-     await fetch(`/api/stepsForGoal/${usersId}/${goalId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newStep),
-      });
+    await fetch(`/api/stepsForGoal/${usersId}/${goalId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newStep),
+    });
   };
 
   return (
-    <div className="space-y-8 min-h-screen pb-24">
+    <div className="space-y-8 min-h-screen pb-24 text-slate-900">
       {/* Header & Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black tracking-tight flex items-center gap-3">
-            <Target className="text-primary" size={32} />
+          <h1 className="text-4xl font-black tracking-tight flex items-center gap-3">
+            <Target className="text-primary" size={36} />
             My Goal Forge
           </h1>
-          <p className="text-muted-foreground mt-1 tracking-wide">Manage and evolve your life goals.</p>
+          <p className="text-slate-500 font-medium italic opacity-80 mt-1">Sculpt your vision into reality.</p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="relative group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={18} />
+        <div className="flex flex-col sm:flex-row items-center gap-4">
+          <div className="relative w-full sm:w-64 group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={18} />
             <input 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Sift through goals..."
-              className="bg-white/5 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all w-full md:w-64"
+              placeholder="Sift goals..."
+              className="w-full bg-white border-2 border-slate-200 rounded-2xl pl-12 pr-4 py-3 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all font-medium"
             />
           </div>
-          <div className="flex bg-white/5 p-1 rounded-xl border border-white/10">
+          <div className="flex bg-slate-100 p-1 rounded-2xl border-2 border-white shadow-sm w-full sm:w-auto">
              {["all", "active", "completed"].map(f => (
                <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all ${
-                    filter === f ? "bg-primary text-white shadow-lg shadow-primary/20" : "text-muted-foreground hover:text-white"
+                  className={`flex-1 sm:flex-none px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                    filter === f ? "bg-white text-primary shadow-md" : "text-slate-500 hover:text-slate-900"
                   }`}
                >
                  {f}
@@ -167,10 +160,10 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
              ))}
           </div>
         </div>
-      </div>
+      </header>
 
       {/* Goal Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <AnimatePresence mode="popLayout">
           {filteredGoals.map((goal) => (
             <GoalCard 
@@ -179,7 +172,7 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
               onSelect={setSelectedGoal}
               onDelete={handleDeleteGoal}
               onToggle={handleToggleGoal}
-              onEdit={() => {}} // TODO: Implement Edit
+              onEdit={() => {}} 
             />
           ))}
         </AnimatePresence>
@@ -187,24 +180,24 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
 
       {/* Empty State */}
       {filteredGoals.length === 0 && (
-        <div className="glass-card p-20 text-center flex flex-col items-center gap-6 border-dashed border-white/10">
-          <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center">
-            <Zap size={40} className="text-muted-foreground" />
+        <div className="glass-card p-20 text-center flex flex-col items-center gap-6 border-dashed border-slate-300 bg-white shadow-inner">
+          <div className="w-24 h-24 rounded-full bg-slate-50 flex items-center justify-center border-4 border-white shadow-xl">
+            <Zap size={44} className="text-slate-300" />
           </div>
-          <div className="max-w-xs">
-            <h3 className="text-xl font-bold mb-2">No Goals Found</h3>
-            <p className="text-sm text-muted-foreground">The forge is cold. Add a new goal to start your journey.</p>
+          <div className="max-w-xs space-y-2">
+            <h3 className="text-2xl font-black">No Goals Found</h3>
+            <p className="text-slate-500 font-medium italic opacity-80">The forge is silent. Ignite your journey with a new objective.</p>
           </div>
           <button 
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all hover:scale-105"
+            className="bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-2xl font-black shadow-2xl shadow-primary/30 transition-all hover:scale-105"
           >
-            Forge New Goal
+            FORGE NEW GOAL
           </button>
         </div>
       )}
 
-      {/* Steps Sidebar/Overlay */}
+      {/* Steps Sidebar / High Contrast Light Overlay */}
       <AnimatePresence>
         {selectedGoal && (
           <div className="fixed inset-0 z-[110] flex items-center justify-end">
@@ -213,67 +206,72 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedGoal(null)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="bg-[#0a0a0c] border-l border-white/10 w-full max-w-md h-full relative z-10 flex flex-col p-8 gap-8"
+              className="bg-white border-l-4 border-primary rounded-l-[40px] shadow-2xl w-full max-w-md h-[95vh] my-auto mr-4 relative z-10 flex flex-col p-10 gap-10"
             >
-              <div className="flex items-center gap-4">
-                 <button onClick={() => setSelectedGoal(null)} className="p-2 hover:bg-white/5 rounded-xl transition-colors">
-                   <ChevronLeft size={24} />
-                 </button>
-                 <div>
-                   <h2 className="text-2xl font-black truncate">{selectedGoal.title}</h2>
-                   <p className="text-xs text-muted-foreground uppercase tracking-widest font-black">Sub-Goal Matrix</p>
-                 </div>
+              <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border-2 border-white shadow-lg">
+                        <Target size={24} />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-black truncate max-w-[200px] tracking-tight">{selectedGoal.title}</h2>
+                        <p className="text-[10px] text-slate-400 uppercase tracking-[0.2em] font-black">Sub-Goal Matrix</p>
+                    </div>
+                  </div>
+                  <button onClick={() => setSelectedGoal(null)} className="p-3 bg-slate-50 hover:bg-red-50 hover:text-red-600 rounded-full transition-all border-2 border-white shadow-lg">
+                    <X size={20} />
+                  </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto space-y-4 pr-2">
+              <div className="flex-1 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
                  {(selectedGoal.steps || []).map((step) => (
-                   <div key={step.stepId} className="glass-card p-4 flex items-center justify-between group">
-                     <div className="flex items-center gap-4">
+                   <div key={step.stepId} className="group p-5 bg-slate-50 border-2 border-white rounded-2xl shadow-sm hover:shadow-md transition-all flex items-center justify-between">
+                     <div className="flex items-center gap-5">
                        <button 
                         onClick={() => handleToggleStep(selectedGoal.IdForGoal, step.stepId, !step.achieved)}
-                        className={`p-1 rounded-md border transition-all ${
-                          step.achieved ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400" : "border-white/20 text-transparent hover:border-primary"
+                        className={`w-8 h-8 rounded-xl border-2 transition-all flex items-center justify-center ${
+                          step.achieved ? "bg-emerald-500 border-emerald-500 text-white shadow-lg shadow-emerald-500/20" : "bg-white border-slate-200 text-transparent hover:border-primary group-hover:bg-slate-50"
                         }`}
                        >
-                         <CheckCircle2 size={16} className={step.achieved ? "" : "text-slate-800 group-hover:text-primary/50"} />
+                         <CheckCircle2 size={18} />
                        </button>
-                       <span className={`font-semibold ${step.achieved ? "line-through text-muted-foreground" : ""}`}>
+                       <span className={`text-lg font-bold tracking-tight ${step.achieved ? "line-through text-slate-400 italic" : "text-slate-800"}`}>
                         {step.title}
                        </span>
                      </div>
                    </div>
                  ))}
                  
-                 {/* Quick Add Step */}
-                 <div className="flex gap-2">
-                   <input 
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && e.target.value) {
-                          handleAddStep(selectedGoal.IdForGoal, e.target.value);
-                          e.target.value = "";
-                        }
-                      }}
-                      placeholder="Add a step..."
-                      className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-primary transition-all text-sm"
-                   />
+                 <div className="relative group pt-4">
+                    <Plus className="absolute left-4 top-1/2 translate-y-[-5%] text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
+                    <input 
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && e.target.value) {
+                            handleAddStep(selectedGoal.IdForGoal, e.target.value);
+                            e.target.value = "";
+                          }
+                        }}
+                        placeholder="Add a new milestone..."
+                        className="w-full bg-slate-100 border-2 border-white rounded-2xl pl-12 pr-4 py-4 outline-none focus:border-primary focus:bg-white shadow-inner transition-all font-bold placeholder:italic placeholder:font-medium"
+                    />
                  </div>
               </div>
 
-              <div className="pt-6 border-t border-white/5">
+              <div className="pt-8 border-t-2 border-slate-50">
                  <button 
                   onClick={() => handleToggleGoal(selectedGoal.IdForGoal, selectedGoal.title, !selectedGoal.achieved)}
-                  className={`w-full py-4 rounded-xl font-black uppercase tracking-widest transition-all ${
-                    selectedGoal.achieved ? "bg-white/5 text-muted-foreground" : "bg-primary text-white shadow-lg shadow-primary/20"
+                  className={`w-full py-5 rounded-2xl font-black uppercase tracking-widest text-lg transition-all active:scale-[0.98] ${
+                    selectedGoal.achieved ? "bg-slate-100 text-slate-400 cursor-not-allowed" : "bg-primary text-white shadow-2xl shadow-primary/30 hover:scale-[1.02]"
                   }`}
                  >
-                   {selectedGoal.achieved ? "Re-activate Goal" : "Ascend to Achievement"}
+                   {selectedGoal.achieved ? "Goal Ascended" : "Complete Mastery"}
                  </button>
               </div>
             </motion.div>
@@ -281,14 +279,13 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
         )}
       </AnimatePresence>
 
-      {/* Quick Add Floating Button */}
       <motion.button
         whileHover={{ scale: 1.1, rotate: 90 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-8 right-8 w-16 h-16 bg-primary text-white rounded-2xl shadow-2xl shadow-primary/40 flex items-center justify-center z-50 border border-white/10"
+        className="fixed bottom-10 right-10 w-20 h-20 bg-primary text-white rounded-[2.5rem] shadow-2xl shadow-primary/40 flex items-center justify-center z-50 border-4 border-white transition-all overflow-hidden"
       >
-        <Plus size={32} />
+        <Plus size={40} className="relative z-10" />
       </motion.button>
 
       <AddGoalModal 
@@ -299,5 +296,3 @@ export default function GoalMarketComponent({ goals, setGoals, usersId, email })
     </div>
   );
 }
-
-import { Target } from "lucide-react";

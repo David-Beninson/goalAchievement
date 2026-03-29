@@ -3,11 +3,8 @@ import {
   Home, 
   Target, 
   BarChart2, 
-  Settings, 
   LogOut, 
-  User as UserIcon,
-  Flame,
-  Award
+  User as UserIcon
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -23,12 +20,12 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className="hidden md:flex flex-col w-64 h-full glass-card fixed left-6 top-1/2 -translate-y-1/2 h-[90vh] py-8 px-4 z-50">
+    <div className="hidden md:flex flex-col w-64 h-full glass shadow-2xl shadow-slate-200 fixed left-6 top-1/2 -translate-y-1/2 h-[90vh] py-8 px-4 z-50 rounded-3xl bg-white/95">
       <div className="flex items-center gap-3 px-4 mb-12">
         <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-lg shadow-primary/20">
           <Target className="text-white shrink-0" size={24} />
         </div>
-        <h1 className="font-bold text-xl tracking-tight">GoalPro</h1>
+        <h1 className="font-black text-xl tracking-tight text-slate-900">GoalPro</h1>
       </div>
 
       <nav className="flex-1 space-y-2">
@@ -36,29 +33,29 @@ export default function Sidebar() {
           <button
             key={item.name}
             onClick={() => router.push(item.path)}
-            className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 ${
+            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 ${
               router.pathname === item.path
-                ? "bg-primary text-white shadow-lg shadow-primary/20"
-                : "text-muted-foreground hover:bg-white/5 hover:text-white"
+                ? "bg-primary text-white shadow-xl shadow-primary/20 scale-[1.02]"
+                : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
             }`}
           >
             <item.icon size={20} className="shrink-0" />
-            <span className="font-medium">{item.name}</span>
+            <span className="font-bold">{item.name}</span>
           </button>
         ))}
       </nav>
 
-      <div className="mt-auto space-y-4 pt-8 border-t border-white/5">
+      <div className="mt-auto space-y-4 pt-8 border-t border-slate-100">
         <button
           onClick={() => signOut()}
-          className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all duration-300"
+          className="w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all duration-300 font-bold"
         >
           <LogOut size={20} className="shrink-0" />
-          <span className="font-medium">Sign Out</span>
+          <span>Sign Out</span>
         </button>
         
-        <div className="glass p-4 rounded-2xl flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center">
+        <div className="bg-slate-50 p-4 rounded-2xl flex items-center gap-3 border border-slate-100">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center shadow-inner">
             {session?.user?.image ? (
               <img src={session.user.image} className="w-full h-full rounded-full object-cover" />
             ) : (
@@ -66,8 +63,8 @@ export default function Sidebar() {
             )}
           </div>
           <div className="overflow-hidden">
-            <p className="text-sm font-semibold truncate">{session?.user?.name || "Guest"}</p>
-            <p className="text-xs text-muted-foreground truncate">{session?.user?.email}</p>
+            <p className="text-sm font-black text-slate-900 truncate tracking-tight">{session?.user?.name || "Member"}</p>
+            <p className="text-[10px] text-slate-500 font-bold truncate opacity-80">{session?.user?.email}</p>
           </div>
         </div>
       </div>
