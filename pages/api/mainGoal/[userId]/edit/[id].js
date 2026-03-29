@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../../../../database/mongodb";
 import { ObjectId } from "mongodb";
 
-export default async function editGoal(req, res) {
+export async function editGoal(req, res) {
   const { db } = await connectToDatabase();
   const { id: mongoUserId, userId: goalId } = req.query; // id is user._id, userId is goal.IdForGoal
   const { title, achieved } = req.body;

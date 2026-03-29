@@ -3,7 +3,7 @@ import { ObjectId } from "mongodb";
 
 const GOALS_COLLECTION = "goals";
 
-export default async function updateGoalStep(req, res) {
+export async function editStepForGoal(req, res) {
   try {
     const { db } = await connectToDatabase();
     const { userId, goalId, stepId } = req.query;

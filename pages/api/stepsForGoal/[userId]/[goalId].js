@@ -1,7 +1,7 @@
 import { connectToDatabase } from "../../../../database/mongodb";
 import { ObjectId } from "mongodb";
 
-export default async function addStepToGoal(req, res) {
+export async function addStepToGoal(req, res) {
   const { db } = await connectToDatabase();
 
   if (!req.query.goalId || !req.query.userId) {
