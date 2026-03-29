@@ -51,6 +51,27 @@ export default function Home({ user }) {
 
   if (!session) return null;
 
+  // Safety check: if user is missing (due to network or sync issues), we show a graceful error or placeholder instead of crashing.
+  if (!user) {
+    return (
+      <Layout>
+        <div className="flex flex-col items-center justify-center min-h-[70vh] space-y-4">
+          <div className="p-4 bg-orange-50 text-orange-600 rounded-xl border border-orange-100 flex items-center gap-3 font-bold">
+            <Sparkles size={20} />
+            Data Sync in Progress...
+          </div>
+          <p className="text-slate-500 font-medium">We're retrieving your achievements. Please try refreshing.</p>
+          <button 
+            onClick={() => router.reload()}
+            className="text-primary font-black uppercase tracking-widest text-sm hover:underline"
+          >
+            REFRESH DASHBOARD
+          </button>
+        </div>
+      </Layout>
+    );
+  }
+
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } }
@@ -264,9 +285,9 @@ export const getServerSideProps = async (context) => {
       props: { user },
     };
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error(`[FRONTEND ERROR] getServerSideProps:`, error);
     return {
-      props: { error: "Error fetching data" },
+      props: { user: null, error: "Error fetching user data from server" },
     };
   }
 };

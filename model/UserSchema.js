@@ -25,7 +25,7 @@ const UserSchema = new Schema({
   streak: { type: Number, default: 0 },
   lastCompletedDate: { type: Date },
   goals: [GoalItemSchema],
-}, { timestamps: true });
+}, { timestamps: true, collection: "goals" });
 
 // Using 'User' as the model name as suggested by the user's friend
 const Users = models.User || model("User", UserSchema);
