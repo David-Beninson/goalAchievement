@@ -26,12 +26,21 @@ import { motion } from "framer-motion";
 export default function Statistics() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("/api/stats")
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`Server returned ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         setStats(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Stats fetch error:", err);
+        setError(err.message);
         setLoading(false);
       });
   }, []);
@@ -41,7 +50,32 @@ export default function Statistics() {
   if (loading) return (
     <Layout>
       <div className="min-h-[80vh] flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-slate-500 font-bold animate-pulse uppercase tracking-widest text-xs">Analyzing Forge Data...</p>
+        </div>
+      </div>
+    </Layout>
+  );
+
+  if (error || !stats) return (
+    <Layout>
+      <div className="min-h-[80vh] flex items-center justify-center p-4">
+        <div className="glass-card p-12 max-w-md w-full text-center space-y-6 bg-white border-2 border-red-100">
+           <div className="w-20 h-20 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white shadow-xl">
+              <Zap size={40} />
+           </div>
+           <h2 className="text-2xl font-black text-slate-900">Sync Interrupted</h2>
+           <p className="text-slate-500 font-medium leading-relaxed">
+             We couldn't retrieve your analytics. This is usually due to a temporary connection spike or missing forge credentials.
+           </p>
+           <button 
+             onClick={() => window.location.reload()}
+             className="w-full bg-primary hover:bg-primary/90 text-white font-black py-4 rounded-xl shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] uppercase tracking-widest"
+           >
+             Retry Synchronization
+           </button>
+        </div>
       </div>
     </Layout>
   );
