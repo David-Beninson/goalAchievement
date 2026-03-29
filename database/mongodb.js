@@ -1,8 +1,8 @@
 import { MongoClient } from "mongodb";
 
-const { MONGO_URI, MONGO_DB } = process.env;
+const { MONGO_URL, MONGO_DB } = process.env;
 
-if (!MONGO_URI) {
+if (!MONGO_URL) {
   throw new Error("No URL provided");
 }
 
@@ -27,7 +27,7 @@ export async function connectToDatabase() {
       useUnifiedTopology: true,
     };
 
-    cached.promise = MongoClient.connect(MONGO_URI, opts).then((client) => {
+    cached.promise = MongoClient.connect(MONGO_URL, opts).then((client) => {
       console.log("Connected to MongoDB!");
       return {
         client,
