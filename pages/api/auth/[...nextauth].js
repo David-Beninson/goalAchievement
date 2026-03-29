@@ -38,7 +38,7 @@ export default NextAuth({
 
         // incorrect password
         if (!checkPassword || result.email !== credentials.email) {
-          throw new Error("Username or Password doesn't match");
+          throw new Error("Email or Password doesn't match");
         }
         delete result.password;
         return result;

@@ -17,7 +17,7 @@ function GoalMarket({ user }) {
   return (
     <Layout>
       <Head>
-        <title>{user?.username || "My"}'s Goal Forge | GoalPro</title>
+        <title>{user?.name || "My"}'s Goal Forge | GoalPro</title>
       </Head>
       
       <div className="py-2">

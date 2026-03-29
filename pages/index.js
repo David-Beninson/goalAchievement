@@ -80,7 +80,7 @@ export default function Home({ user }) {
                <Sparkles size={14} /> Global Achievement Nexus
              </div>
             <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
-              Welcome back, {user.username}!
+              Welcome back, {user.name || "Member"}!
             </h1>
             <p className="text-slate-500 font-medium italic opacity-80">
               "{motivation}"

@@ -17,16 +17,17 @@ const GoalItemSchema = new Schema({
 });
 
 const UserSchema = new Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String },
+  name: { type: String, required: [true, "Please provide a name"] },
+  email: { type: String, required: [true, "Please provide an email"], unique: true },
+  password: { type: String, required: [true, "Please provide a password"] },
   xp: { type: Number, default: 0 },
   level: { type: Number, default: 1 },
   streak: { type: Number, default: 0 },
   lastCompletedDate: { type: Date },
   goals: [GoalItemSchema],
-});
+}, { timestamps: true });
 
-const Users = models.Goals || model("Goals", UserSchema);
+// Using 'User' as the model name as suggested by the user's friend
+const Users = models.User || model("User", UserSchema);
 
 export default Users;

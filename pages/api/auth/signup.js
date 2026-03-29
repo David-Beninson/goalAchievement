@@ -21,7 +21,11 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Request body cannot be empty" });
   }
 
-  const { username, email, password } = req.body;
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
 
   // Check if email is already registered
   const existingUser = await UserSchema.findOne({ email });
@@ -33,7 +37,7 @@ export default async function handler(req, res) {
   try {
     const hashedPassword = await hash(password, 12);
     const newUser = await UserSchema.create({
-      username,
+      name,
       email,
       password: hashedPassword,
     });

@@ -15,7 +15,7 @@ const SignUp = () => {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -82,13 +82,13 @@ const SignUp = () => {
               <User size={14} className="text-primary" /> Full Name
             </label>
             <input
-              {...formik.getFieldProps("username")}
+              {...formik.getFieldProps("name")}
               type="text"
-              placeholder="Jane Doe"
-              className={`w-full bg-slate-50 border-2 ${formik.errors.username && formik.touched.username ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-3.5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 font-medium`}
+              placeholder="David Beninson"
+              className={`w-full bg-slate-50 border-2 ${formik.errors.name && formik.touched.name ? 'border-red-300' : 'border-slate-200'} rounded-xl px-4 py-3.5 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400 font-medium`}
             />
-            {formik.errors.username && formik.touched.username && (
-              <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest px-1">{formik.errors.username}</p>
+            {formik.errors.name && formik.touched.name && (
+              <p className="text-[10px] font-bold text-red-500 uppercase tracking-widest px-1">{formik.errors.name}</p>
             )}
           </div>
 
